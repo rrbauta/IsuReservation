@@ -1,4 +1,6 @@
-﻿using IsuReservation.Data;
+﻿using IsuReservation.Abstract;
+using IsuReservation.Data;
+using IsuReservation.Impl;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +24,14 @@ public class Startup
 
         services.AddDbContext<AppDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+        #region Business layer
+
+        services.AddTransient<IContactManager, ContactManager>();
+        services.AddTransient<IDestinationManager, DestinationManager>();
+        services.AddTransient<IReservationManager, ReservationManager>();
+
+        #endregion
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

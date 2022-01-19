@@ -206,7 +206,7 @@ public class ContactManager : IContactManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public Contact? Find(string name)
+    public Contact? FindContactByName(string name)
     {
         var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
             .ToLower();
@@ -214,6 +214,18 @@ public class ContactManager : IContactManager
         var contact = _dbContext.Contacts.FirstOrDefault(u => Regex
             .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
             .ToLower() == nameToFind);
+
+        return contact;
+    }
+
+    /// <summary>
+    ///     Find contact by ID
+    /// </summary>
+    /// <param name="contactId"></param>
+    /// <returns></returns>
+    public Contact? FindContact(Guid contactId)
+    {
+        var contact = _dbContext.Contacts.FirstOrDefault(u => u.Id == contactId);
 
         return contact;
     }

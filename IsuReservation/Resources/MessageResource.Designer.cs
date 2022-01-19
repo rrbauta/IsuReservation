@@ -116,5 +116,23 @@ namespace IsuReservation.Resources {
                 return ResourceManager.GetString("ReservationAlreadyExist", resourceCulture);
             }
         }
+        
+        internal static string UnhandledError {
+            get {
+                return ResourceManager.GetString("UnhandledError", resourceCulture);
+            }
+        }
+        
+        internal static string ReservationNotFound {
+            get {
+                return ResourceManager.GetString("ReservationNotFound", resourceCulture);
+            }
+        }
+        
+        internal static string ContactFieldEmpty {
+            get {
+                return ResourceManager.GetString("ContactFieldEmpty", resourceCulture);
+            }
+        }
     }
 }

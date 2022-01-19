@@ -51,4 +51,13 @@
     <data name="ReservationAlreadyExist" xml:space="preserve">
         <value>La Reservaciòn ya està registrada</value>
     </data>
+    <data name="UnhandledError" xml:space="preserve">
+        <value>Ha ocurrido un error. Por favor intèntelo màs tarde</value>
+    </data>
+    <data name="ReservationNotFound" xml:space="preserve">
+        <value>Reservaciòn no encontrada</value>
+    </data>
+    <data name="ContactFieldEmpty" xml:space="preserve">
+        <value>El campo Contacto es obligatorio </value>
+    </data>
 </root>

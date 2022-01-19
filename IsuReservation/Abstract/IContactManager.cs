@@ -51,5 +51,12 @@ public interface IContactManager
     /// </summary>
     /// <param name="name"></param>
     /// <returns></returns>
-    public Contact? Find(string name);
+    public Contact? FindContactByName(string name);
+
+    /// <summary>
+    ///     Find contact by ID
+    /// </summary>
+    /// <param name="contactId"></param>
+    /// <returns></returns>
+    public Contact? FindContact(Guid contactId);
 }

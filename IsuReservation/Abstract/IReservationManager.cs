@@ -13,13 +13,13 @@ public interface IReservationManager
     /// <returns></returns>
     public Task<IsuResponse<ReservationViewModel>> Create(ReservationRequest request);
 
-    // /// <summary>
-    // /// Update a reservation. Return reservation updated
-    // /// </summary>
-    // /// <param name="request"></param>
-    // /// <param name="reservationId"></param>
-    // /// <returns></returns>
-    // public Task<IsuResponse<ReservationViewModel>> Update(ContactUpdateRequest request, Guid reservationId);
+    /// <summary>
+    ///     Update a reservation. Return reservation updated
+    /// </summary>
+    /// <param name="request"></param>
+    /// <param name="reservationId"></param>
+    /// <returns></returns>
+    public Task<IsuResponse<ReservationViewModel>> Update(ReservationUpdateRequest request, Guid reservationId);
 
     /// <summary>
     ///     Reservation list. Return all reservations

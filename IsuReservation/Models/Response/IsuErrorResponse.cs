@@ -1,10 +1,10 @@
 namespace IsuReservation.Models.Response;
 
-public class ErrorResponse : IsuBaseModel
+public class IsuErrorResponse : IsuBaseModel
 {
     public string? ErrorDescription { get; set; }
 
-    public ErrorResponse(string? error)
+    public IsuErrorResponse(string? error)
     {
         if (string.IsNullOrEmpty(error)) ErrorDescription = "Data received was not string. Please report urgently.";
 

@@ -60,4 +60,13 @@
     <data name="ReservationAlreadyExist" xml:space="preserve">
         <value>Reservation already exist</value>
     </data>
+    <data name="UnhandledError" xml:space="preserve">
+        <value>Something went wrong. Plase try again later</value>
+    </data>
+    <data name="ReservationNotFound" xml:space="preserve">
+        <value>Reservation not found</value>
+    </data>
+    <data name="ContactFieldEmpty" xml:space="preserve">
+        <value>Contact field is mandatory</value>
+    </data>
 </root>
