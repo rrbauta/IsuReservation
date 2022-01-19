@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IsuReservation.Models;
+namespace IsuReservation.Models.Entities;
 
 public class Contact : BaseEntity
 {

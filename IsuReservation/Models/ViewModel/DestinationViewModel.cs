@@ -1,14 +1,19 @@
-namespace IsuReservation.Models;
+namespace IsuReservation.Models.ViewModel;
 
-public class Destination : BaseEntity
+public class DestinationViewModel
 {
+    /// <summary>
+    ///     Destination identifier
+    /// </summary>
+    public Guid Id { get; set; }
+
     /// <summary>
     ///     Destination name
     /// </summary>
     public string Name { get; set; }
 
     /// <summary>
-    ///     Destination rating, must be a value between 0 and 5
+    ///     Destination rating
     /// </summary>
     public int Rating { get; set; }
 
@@ -26,9 +31,4 @@ public class Destination : BaseEntity
     ///     Destination Image url
     /// </summary>
     public string Image { get; set; }
-
-    /// <summary>
-    ///     Reservation List for this destination
-    /// </summary>
-    public virtual ICollection<Reservation> Reservations { get; set; }
 }

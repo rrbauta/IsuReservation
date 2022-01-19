@@ -1,4 +1,4 @@
-namespace IsuReservation.Models;
+namespace IsuReservation.Models.Entities;
 
 public class ContactType : BaseEntity
 {

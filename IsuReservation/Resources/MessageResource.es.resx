@@ -1,0 +1,39 @@
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>1.3</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral,
+            PublicKeyToken=b77a5c561934e089
+        </value>
+    </resheader>
+    <data name="NameFieldEmpty" xml:space="preserve">
+        <value>El campo Nombre es obligatorio</value>
+    </data>
+    <data name="BirthDayFieldEmpty" xml:space="preserve">
+        <value>El campo Fecha de nacimiento es obligatorio</value>
+    </data>
+    <data name="ContactTypeFieldEmpty" xml:space="preserve">
+        <value>El campo Tipo de contacto es obligatorio</value>
+    </data>
+    <data name="AgeOlderThan18" xml:space="preserve">
+        <value>Debe tener màs de 18 años</value>
+    </data>
+    <data name="InvalidDate" xml:space="preserve">
+        <value>Fecha inválida</value>
+    </data>
+    <data name="ContactNotFound" xml:space="preserve">
+        <value>Contacto no encontrado</value>
+    </data>
+    <data name="ContactAlreadyExist" xml:space="preserve">
+        <value>El Contacto ya està registrado</value>
+    </data>
+</root>

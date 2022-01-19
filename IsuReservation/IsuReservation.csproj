@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.SpaProxy" Version="6.0.1"/>
+        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="6.0.1"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.1"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.1">
             <PrivateAssets>all</PrivateAssets>
@@ -36,9 +37,22 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Filters"/>
-        <Folder Include="Helpers"/>
-        <Folder Include="Impl"/>
+        <Folder Include="Meta"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="Resources\MessageResource.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>MessageResource.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Compile Update="Resources\MessageResource.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>MessageResource.resx</DependentUpon>
+        </Compile>
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

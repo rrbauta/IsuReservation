@@ -1,8 +1,8 @@
-using IsuReservation.Meta;
+using IsuReservation.Abstract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace IsuReservation.Models;
+namespace IsuReservation.Models.Entities;
 
 public abstract class BaseEntity
 {
@@ -30,7 +30,7 @@ public abstract class BaseEntity
     public DateTime DateModified { get; set; } = DateTime.Now;
 
     /// <summary>
-    ///     Entity deleted. This field be used to implement a soft delete
+    ///     Entity deleted. This field will be used to implement a soft delete
     /// </summary>
     public bool IsDeleted { get; set; }
 

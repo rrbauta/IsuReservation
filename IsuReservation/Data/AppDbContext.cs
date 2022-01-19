@@ -1,5 +1,5 @@
 using IsuReservation.Abstract;
-using IsuReservation.Models;
+using IsuReservation.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace IsuReservation.Data;
