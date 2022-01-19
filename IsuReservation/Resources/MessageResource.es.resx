@@ -36,4 +36,19 @@
     <data name="ContactAlreadyExist" xml:space="preserve">
         <value>El Contacto ya està registrado</value>
     </data>
+    <data name="DateFieldEmpty" xml:space="preserve">
+        <value>El campo Fecha es obligatorio</value>
+    </data>
+    <data name="TimeFieldEmpty" xml:space="preserve">
+        <value>El campo Hora es obligatorio</value>
+    </data>
+    <data name="InvalidTime" xml:space="preserve">
+        <value>Hora invàlida</value>
+    </data>
+    <data name="DestinationFieldEmpty" xml:space="preserve">
+        <value>El campo Destino es obligatorio</value>
+    </data>
+    <data name="ReservationAlreadyExist" xml:space="preserve">
+        <value>La Reservaciòn ya està registrada</value>
+    </data>
 </root>

@@ -1,3 +1,4 @@
+using IsuReservation.Models.Entities;
 using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
@@ -44,4 +45,11 @@ public interface IContactManager
     /// <param name="name"></param>
     /// <returns></returns>
     public Task<IsuResponse<ContactViewModel>> FindByName(string name);
+
+    /// <summary>
+    ///     Find contact by name
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public Contact? Find(string name);
 }

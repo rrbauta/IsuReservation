@@ -2,18 +2,63 @@ using IsuReservation.Abstract;
 using IsuReservation.Data;
 using IsuReservation.Helpers;
 using IsuReservation.Models.Entities;
+using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
+using IsuReservation.Resources;
 
 namespace IsuReservation.Impl;
 
 public class ReservationManager : IReservationManager
 {
     private readonly AppDbContext _dbContext;
+    private readonly IContactManager _contactManager;
 
-    public ReservationManager(AppDbContext dbContext)
+    /// <summary>
+    /// </summary>
+    /// <param name="dbContext"></param>
+    /// <param name="contactManager"></param>
+    public ReservationManager(AppDbContext dbContext, IContactManager contactManager)
     {
         _dbContext = dbContext;
+        _contactManager = contactManager;
+    }
+
+    /// <summary>
+    ///     Create a reservation. Return reservation created
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public async Task<IsuResponse<ReservationViewModel>> Create(ReservationRequest request)
+    {
+        var response = request.Validate();
+        if (!response.IsSuccess)
+            return response;
+
+        var contact = _contactManager.Find(request.ContactName);
+        var reservation = _dbContext.Reservations.FirstOrDefault(r =>
+            r.Date == request.Date && r.Time == request.Time && r.DestinationId == request.DestinationId &&
+            contact != default && r.ContactId == contact.Id);
+
+        if (reservation != default)
+            return new IsuResponse<ReservationViewModel>(MessageResource.ReservationAlreadyExist);
+
+        if (contact == default)
+            return new IsuResponse<ReservationViewModel>(MessageResource.ContactNotFound);
+
+        var myReservation = new Reservation
+        {
+            Date = request.Date,
+            Time = request.Time,
+            Description = request.Description,
+            DestinationId = request.DestinationId
+        };
+
+        contact.Reservations.Add(myReservation);
+        _dbContext.Update(contact);
+        await _dbContext.SaveChangesAsync();
+
+        return new IsuResponse<ReservationViewModel>(ReservationHelper.ConvertReservationToViewModel(myReservation));
     }
 
     /// <summary>

@@ -50,7 +50,8 @@ public class ContactManager : IContactManager
             Name = request.Name,
             BirthDate = request.BirthDate,
             ContactTypeId = request.ContactTypeId,
-            PhoneNumber = request.PhoneNumber
+            PhoneNumber = request.PhoneNumber,
+            Reservations = new List<Reservation>()
         };
 
         _dbContext.Add(contact);
@@ -198,5 +199,22 @@ public class ContactManager : IContactManager
         return contact != default
             ? new IsuResponse<ContactViewModel>(ContactHelper.ConvertContactToViewModel(contact))
             : new IsuResponse<ContactViewModel>(new ContactViewModel());
+    }
+
+    /// <summary>
+    ///     Find contact by name
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns></returns>
+    public Contact? Find(string name)
+    {
+        var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+            .ToLower();
+
+        var contact = _dbContext.Contacts.FirstOrDefault(u => Regex
+            .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+            .ToLower() == nameToFind);
+
+        return contact;
     }
 }

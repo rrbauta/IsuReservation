@@ -86,5 +86,35 @@ namespace IsuReservation.Resources {
                 return ResourceManager.GetString("ContactAlreadyExist", resourceCulture);
             }
         }
+        
+        internal static string DateFieldEmpty {
+            get {
+                return ResourceManager.GetString("DateFieldEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string TimeFieldEmpty {
+            get {
+                return ResourceManager.GetString("TimeFieldEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidTime {
+            get {
+                return ResourceManager.GetString("InvalidTime", resourceCulture);
+            }
+        }
+        
+        internal static string DestinationFieldEmpty {
+            get {
+                return ResourceManager.GetString("DestinationFieldEmpty", resourceCulture);
+            }
+        }
+        
+        internal static string ReservationAlreadyExist {
+            get {
+                return ResourceManager.GetString("ReservationAlreadyExist", resourceCulture);
+            }
+        }
     }
 }

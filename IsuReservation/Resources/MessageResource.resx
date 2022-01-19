@@ -45,4 +45,19 @@
     <data name="ContactAlreadyExist" xml:space="preserve">
         <value>Contact already exist</value>
     </data>
+    <data name="DateFieldEmpty" xml:space="preserve">
+        <value>Date field is mandatory</value>
+    </data>
+    <data name="TimeFieldEmpty" xml:space="preserve">
+        <value>Time field is mandatory</value>
+    </data>
+    <data name="InvalidTime" xml:space="preserve">
+        <value>Invalid time</value>
+    </data>
+    <data name="DestinationFieldEmpty" xml:space="preserve">
+        <value>Destination field is mandatory</value>
+    </data>
+    <data name="ReservationAlreadyExist" xml:space="preserve">
+        <value>Reservation already exist</value>
+    </data>
 </root>

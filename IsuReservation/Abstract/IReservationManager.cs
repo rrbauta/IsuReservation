@@ -1,3 +1,4 @@
+using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
 
@@ -5,13 +6,13 @@ namespace IsuReservation.Abstract;
 
 public interface IReservationManager
 {
-    // /// <summary>
-    // /// Create a reservation. Return reservation created
-    // /// </summary>
-    // /// <param name="request"></param>
-    // /// <returns></returns>
-    // public Task<IsuResponse<ReservationViewModel>> Create(ReservationRequest request);
-    //
+    /// <summary>
+    ///     Create a reservation. Return reservation created
+    /// </summary>
+    /// <param name="request"></param>
+    /// <returns></returns>
+    public Task<IsuResponse<ReservationViewModel>> Create(ReservationRequest request);
+
     // /// <summary>
     // /// Update a reservation. Return reservation updated
     // /// </summary>
