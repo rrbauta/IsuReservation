@@ -11,7 +11,6 @@ import {ReservationListComponent} from "./reservation-list/reservation-list.comp
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {BarRatingModule} from "ngx-bar-rating";
 
 @NgModule({
   declarations: [
@@ -31,7 +30,6 @@ import {BarRatingModule} from "ngx-bar-rating";
     ]),
     MatTableModule,
     MatPaginatorModule,
-    BarRatingModule,
     ReactiveFormsModule
   ],
   providers: [],

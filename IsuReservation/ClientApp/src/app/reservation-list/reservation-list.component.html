@@ -1,0 +1,89 @@
+<nav
+  class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2 col-sm-12 col-md-6"><label class="banner-label"><b i18n>Reservation List</b></label></div>
+      <div class="col-lg-6 col-sm-12 col-md-6 hidden-text"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+      </div>
+      <div class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n onclick="">Create Reservation</button>
+
+      </div>
+      <div class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n onclick="">Contact List</button>
+      </div>
+    </div>
+  </div>
+
+</nav>
+<div *ngIf="reservations.length>0" class="container">
+  <div class="row">
+    <div class="col-lg-3 col-sm-4 col-md-4 fontuser">
+      <!--      <fa-icon [icon]="faCoffee" class="fa-ico"></fa-icon>-->
+      <select class="sort" id="user_type" name="sort_by" required>
+        <option i18n selected value="0">Sort By</option>
+        <option i18n value="1">By Date Ascending</option>
+        <option i18n value="2">By Date Descending</option>
+        <option i18n value="3">By Alphabetic Ascending</option>
+        <option i18n value="4">By Alphabetic Descending</option>
+        <option i18n value="5">By Ranking</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <table [dataSource]="reservations" class="table" mat-table>
+      <ng-container matColumnDef="image">
+        <th *matHeaderCellDef mat-header-cell></th>
+        <td *matCellDef="let row" mat-cell>
+          <img alt="{{row.name}}" class="image" src="../../assets/images/{{ row.destination.image }}">
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <th *matHeaderCellDef mat-header-cell>Name</th>
+        <td *matCellDef="let row" mat-cell>
+          <span>
+              <strong>
+                {{ row.destination.name }}
+              </strong>
+            </span>
+          <div class="hidden-text">
+            <span>{{ row.date }}</span>{{ row.time }}
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="rating">
+        <th *matHeaderCellDef mat-header-cell>Rating</th>
+        <td *matCellDef="let row" mat-cell>
+          <bar-rating [(rate)]="rating" [max]="5"></bar-rating>
+
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="favorite">
+        <th *matHeaderCellDef mat-header-cell>Favorite</th>
+        <td *matCellDef="let row" mat-cell>true</td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th *matHeaderCellDef mat-header-cell>Actions</th>
+        <td *matCellDef="let row" mat-cell>true</td>
+      </ng-container>
+
+      <!--        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
+      <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
+    </table>
+    <mat-paginator
+      [length]="totalRecords"
+      [pageSizeOptions]="[5, 10, 15]"
+      [pageSize]=5
+      showFirstLastButtons
+    >
+    </mat-paginator>
+  </div>
+</div>
+
+<div *ngIf="reservations.length==0" class="container">
+  <span i18n>No data available</span>
+</div>
