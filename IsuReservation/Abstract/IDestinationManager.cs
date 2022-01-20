@@ -1,3 +1,4 @@
+using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
 
@@ -10,4 +11,16 @@ public interface IDestinationManager
     /// </summary>
     /// <returns></returns>
     public Task<IsuResponse<List<DestinationViewModel>>> List();
+
+    /// <summary>
+    ///     Destination as favorite
+    /// </summary>
+    /// <returns></returns>
+    public Task<IsuResponse<DestinationViewModel>> SetFavorite(Guid destinationId);
+
+    /// <summary>
+    ///     Set ranking
+    /// </summary>
+    /// <returns></returns>
+    public Task<IsuResponse<DestinationViewModel>> SetRanking(Guid destinationId, SetRankingRequest request);
 }

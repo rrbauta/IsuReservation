@@ -60,4 +60,10 @@
     <data name="ContactFieldEmpty" xml:space="preserve">
         <value>El campo Contacto es obligatorio </value>
     </data>
+    <data name="DestinationNotFound" xml:space="preserve">
+        <value>Destino no encontrado</value>
+    </data>
+    <data name="InvalidRankingValue" xml:space="preserve">
+        <value>Evaluaciòn invàlida</value>
+    </data>
 </root>

@@ -69,4 +69,10 @@
     <data name="ContactFieldEmpty" xml:space="preserve">
         <value>Contact field is mandatory</value>
     </data>
+    <data name="DestinationNotFound" xml:space="preserve">
+        <value>Destination not found</value>
+    </data>
+    <data name="InvalidRankingValue" xml:space="preserve">
+        <value>Invalid ranking value</value>
+    </data>
 </root>

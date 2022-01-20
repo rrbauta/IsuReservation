@@ -15,12 +15,12 @@ public class ReservationViewModel
     /// <summary>
     ///     Reservation date
     /// </summary>
-    public DateTime Date { get; set; }
+    public string Date { get; set; }
 
     /// <summary>
     ///     Reservation time
     /// </summary>
-    public TimeSpan Time { get; set; }
+    public string Time { get; set; }
 
     /// <summary>
     ///     Contact

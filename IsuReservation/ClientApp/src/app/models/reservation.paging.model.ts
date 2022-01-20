@@ -1,4 +1,5 @@
 import {ReservationModel} from "./reservation.model";
+import {Destination} from "./destination.model";
 
 export interface ReservationPagingModel {
   data: Data;
@@ -12,4 +13,10 @@ export interface Data {
   recordsPerPage: number;
   totalPages: number;
   totalRecords: number;
+}
+
+export interface DestinationModel {
+  data: Destination;
+  exception: string;
+  isSuccess: boolean
 }

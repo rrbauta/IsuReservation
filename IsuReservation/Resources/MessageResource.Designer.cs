@@ -134,5 +134,17 @@ namespace IsuReservation.Resources {
                 return ResourceManager.GetString("ContactFieldEmpty", resourceCulture);
             }
         }
+        
+        internal static string DestinationNotFound {
+            get {
+                return ResourceManager.GetString("DestinationNotFound", resourceCulture);
+            }
+        }
+        
+        internal static string InvalidRankingValue {
+            get {
+                return ResourceManager.GetString("InvalidRankingValue", resourceCulture);
+            }
+        }
     }
 }

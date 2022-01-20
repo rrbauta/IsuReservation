@@ -59,9 +59,15 @@ html {
   font-size: larger;
 }
 
-.image {
+.destination-image {
   max-width: 100px;
   padding: 3px;
+}
+
+.favorite-image {
+  max-width: 25px;
+  padding: 3px;
+  cursor: pointer;
 }
 
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
@@ -70,19 +76,4 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   vertical-align: middle;
-}
-
-.cont {
-  width: 93%;
-  max-width: 350px;
-  text-align: center;
-  margin: 4% auto;
-  padding: 30px 0;
-  color: #EEE;
-  overflow: hidden;
-}
-
-div.stars {
-  width: 270px;
-  display: inline-block;
 }

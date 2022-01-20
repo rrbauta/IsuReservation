@@ -3,7 +3,7 @@ import {Destination} from "./destination.model";
 import {Contact} from "./contact.model";
 
 export interface ReservationModel {
-  id: number;
+  id: string;
   description: string;
   date: Date;
   time: Time;

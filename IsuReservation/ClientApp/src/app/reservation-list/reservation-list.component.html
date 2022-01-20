@@ -39,11 +39,13 @@
       <ng-container matColumnDef="image">
         <th *matHeaderCellDef mat-header-cell></th>
         <td *matCellDef="let row" mat-cell>
-          <img alt="{{row.name}}" class="image" src="../../assets/images/{{ row.destination.image }}">
+          <img alt="{{row.destination.name}}" class="destination-image"
+               src="../../assets/images/{{ row.destination.image }}">
         </td>
       </ng-container>
+
       <ng-container matColumnDef="name">
-        <th *matHeaderCellDef mat-header-cell>Name</th>
+        <th *matHeaderCellDef i18n mat-header-cell>Name</th>
         <td *matCellDef="let row" mat-cell>
           <span>
               <strong>
@@ -51,24 +53,40 @@
               </strong>
             </span>
           <div class="hidden-text">
-            <span>{{ row.date }}</span>{{ row.time }}
+            <span i18n>{{ row.date }} at {{ row.time }}</span>
           </div>
         </td>
       </ng-container>
-      <ng-container matColumnDef="rating">
-        <th *matHeaderCellDef mat-header-cell>Rating</th>
-        <td *matCellDef="let row" mat-cell>
-          <bar-rating [(rate)]="rating" [max]="5"></bar-rating>
 
+      <ng-container matColumnDef="rating">
+        <th *matHeaderCellDef i18n mat-header-cell>Rating</th>
+        <td *matCellDef="let row" mat-cell>
+          <div i18n>Ranking</div>
+          <mat-star-rating (ratingUpdated)="onRatingChanged($event)" [id]="row.destination.id"
+                           [rating]="row.destination.rating"></mat-star-rating>
         </td>
       </ng-container>
+
       <ng-container matColumnDef="favorite">
-        <th *matHeaderCellDef mat-header-cell>Favorite</th>
-        <td *matCellDef="let row" mat-cell>true</td>
+        <th *matHeaderCellDef i18n mat-header-cell>Favorite</th>
+        <td *matCellDef="let row" mat-cell>
+          <span (click)="setFavorite(row.destination.id, row.id)" i18n style="cursor: pointer">Add Favorites</span>
+
+          <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="row.destination.favorite"
+               alt="" class="favorite-image"
+               src="../../assets/images/favorite-heart-icon-active.png">
+
+          <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="!row.destination.favorite"
+               alt="" class="favorite-image"
+               src="../../assets/images/favorite-heart-icon-disabled.png">
+        </td>
       </ng-container>
+
       <ng-container matColumnDef="actions">
-        <th *matHeaderCellDef mat-header-cell>Actions</th>
-        <td *matCellDef="let row" mat-cell>true</td>
+        <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
+        <td *matCellDef="let row" mat-cell>
+          <button class="btn-rounded" i18n onclick="">Edit</button>
+        </td>
       </ng-container>
 
       <!--        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->

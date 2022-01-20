@@ -12,11 +12,14 @@ public class ReservationHelper
     /// <returns></returns>
     public static ReservationViewModel ConvertReservationToViewModel(Reservation reservation)
     {
+        var time = DateTime.Today.Add(reservation.Time);
+        var displayTime = time.ToString("hh:mm tt"); // It will give "03:00 AM"
+
         var reservationToViewModel = new ReservationViewModel
         {
             Id = reservation.Id,
-            Date = reservation.Date,
-            Time = reservation.Time,
+            Date = reservation.Date.ToString("dddd MMMM dd"),
+            Time = displayTime,
             Description = reservation.Description,
             Contact = ContactHelper.ConvertContactToViewModel(reservation.Contact),
             Destination = DestinationHelper.ConvertDestinationToViewModel(reservation.Destination)
