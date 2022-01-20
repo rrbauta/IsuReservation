@@ -15,7 +15,7 @@ export class ReservationService {
     this.baseUrl = baseUrl;
   }
 
-  getReservations(page: number = 1, recordsPerPage: number = 10, sortBy: string = 'date', sortDesc: boolean = false): Observable<ReservationPagingModel> {
+  getReservations(page: number = 1, recordsPerPage: number = 10, sortBy: string, sortDesc: boolean): Observable<ReservationPagingModel> {
     return this.httpClient.get<ReservationPagingModel>(this.baseUrl + `api/reservations?page=${page}&recordsPerPage=${recordsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`);
   }
 }

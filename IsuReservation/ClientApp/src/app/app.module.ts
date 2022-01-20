@@ -18,6 +18,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {StarRatingComponent} from "./star-rating/star-rating.component";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from "@angular/material/select";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import {MatSelectModule} from "@angular/material/select";
     MatFormFieldModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressBarModule
   ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]

@@ -153,35 +153,35 @@ public class ReservationManager : IReservationManager
         if (page < 0)
             page = 1;
 
-        var orderList = sortBy switch
-        {
-            "date" => sortDesc
-                ? reservations.OrderByDescending(t => t.Date).ToList()
-                : reservations.OrderBy(t => t.Date).ToList(),
-            "alphabetic" => sortDesc
-                ? reservations.OrderByDescending(t => t.Destination.Name).ToList()
-                : reservations.OrderBy(t => t.Destination.Name).ToList(),
-            "ranking" => sortDesc
-                ? reservations.OrderByDescending(t => t.Destination.Rating).ToList()
-                : reservations.OrderBy(t => t.Destination.Rating).ToList(),
-            _ => sortDesc
-                ? reservations.OrderByDescending(t => t.Date).ToList()
-                : reservations.OrderBy(t => t.Date).ToList()
-        };
-
         if (page > 0)
         {
             myList = recordsPerPage < 0
-                ? orderList.ToList()
-                : orderList.Skip((page - 1) * recordsPerPage).Take(recordsPerPage).ToList();
+                ? reservations.ToList()
+                : reservations.Skip((page - 1) * recordsPerPage).Take(recordsPerPage).ToList();
 
-            totalRecords = orderList.ToList().Count;
+            totalRecords = reservations.ToList().Count;
         }
         else
         {
             myList = reservations;
             totalRecords = reservations.Count;
         }
+
+        var orderList = sortBy switch
+        {
+            "date" => sortDesc
+                ? myList.OrderByDescending(t => t.Date).ToList()
+                : myList.OrderBy(t => t.Date).ToList(),
+            "alphabetic" => sortDesc
+                ? myList.OrderByDescending(t => t.Destination.Name).ToList()
+                : myList.OrderBy(t => t.Destination.Name).ToList(),
+            "ranking" => sortDesc
+                ? myList.OrderByDescending(t => t.Destination.Rating).ToList()
+                : myList.OrderBy(t => t.Destination.Rating).ToList(),
+            _ => sortDesc
+                ? myList.OrderByDescending(t => t.Date).ToList()
+                : myList.OrderBy(t => t.Date).ToList()
+        };
 
         var totalPages = (int) Math.Ceiling((double) totalRecords / recordsPerPage);
 
@@ -198,7 +198,7 @@ public class ReservationManager : IReservationManager
             TotalRecords = totalRecords,
             TotalPages = totalPages,
             ActualPage = page,
-            Outcome = ReservationHelper.ConvertReservationToViewModel(myList)
+            Outcome = ReservationHelper.ConvertReservationToViewModel(orderList)
         };
 
         return new IsuResponse<Paging<ReservationViewModel>>(response);
