@@ -19,19 +19,17 @@
   </div>
 
 </nav>
+
 <div *ngIf="reservations.length>0" class="container">
-  <div class="row">
-    <div class="col-lg-3 col-sm-4 col-md-4 fontuser">
-      <!--      <fa-icon [icon]="faCoffee" class="fa-ico"></fa-icon>-->
-      <select class="sort" id="user_type" name="sort_by" required>
-        <option i18n selected value="0">Sort By</option>
-        <option i18n value="1">By Date Ascending</option>
-        <option i18n value="2">By Date Descending</option>
-        <option i18n value="3">By Alphabetic Ascending</option>
-        <option i18n value="4">By Alphabetic Descending</option>
-        <option i18n value="5">By Ranking</option>
-      </select>
-    </div>
+
+  <div class="col-lg-4 col-sm-4 col-md-4">
+    <mat-form-field appearance="fill">
+      <mat-select (selectionChange)="sortChange($event.value)" [(value)]="sortOption" required>
+        <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
+          {{ opt.text }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 
   <div class="row">
@@ -92,10 +90,11 @@
       <!--        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
       <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
     </table>
+
     <mat-paginator
       [length]="totalRecords"
       [pageSizeOptions]="[5, 10, 15]"
-      [pageSize]=5
+      [pageSize]=2
       showFirstLastButtons
     >
     </mat-paginator>

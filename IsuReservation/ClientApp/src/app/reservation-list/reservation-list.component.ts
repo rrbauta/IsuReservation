@@ -15,6 +15,17 @@ export class ReservationListComponent implements AfterViewInit {
   columnsToDisplay = ['image', 'name', 'rating', 'favorite', 'actions'];
   totalRecords = 0;
   reservations: ReservationModel[] = [];
+  sortBy: string = 'date';
+  sortDesc: boolean = false;
+  sortOption: number = 0;
+  selectOptions = [
+    {'text': 'Sort By', 'value': 0},
+    {'text': 'By Date Ascending', 'value': 1},
+    {'text': 'By Date Descending', 'value': 2},
+    {'text': 'By Alphabetic Ascending', 'value': 3},
+    {'text': 'By Alphabetic Descending', 'value': 4},
+    {'text': 'By Ranking', 'value': 5}
+  ];
 
   @ViewChild(MatPaginator) paginator?: MatPaginator;
 
@@ -26,9 +37,49 @@ export class ReservationListComponent implements AfterViewInit {
     this.initialLoad();
   }
 
+  sortChange(option: number) {
+    console.log(option);
+    switch (option) {
+      case 1: {
+        this.sortBy = 'date';
+        this.sortDesc = false;
+        break;
+      }
+      case 2: {
+        this.sortBy = 'date';
+        this.sortDesc = true;
+        break;
+      }
+      case 3: {
+        this.sortBy = 'alphabetic';
+        this.sortDesc = false;
+        break;
+      }
+      case 4: {
+        this.sortBy = 'alphabetic';
+        this.sortDesc = true;
+        break;
+      }
+      case 5: {
+        this.sortBy = 'ranking';
+        this.sortDesc = true;
+        break;
+      }
+      default: {
+        this.sortBy = 'date';
+        this.sortDesc = true;
+        break;
+      }
+    }
+
+    this.initialLoad();
+  }
+
   initialLoad() {
+    console.log(this.sortBy)
+    console.log(this.sortDesc)
     let currentPage = (this.paginator?.pageIndex ?? 0) + 1;
-    this.reservationService.getReservations(currentPage, (this.paginator?.pageSize ?? 10))
+    this.reservationService.getReservations(currentPage, (this.paginator?.pageSize ?? 10), this.sortBy, this.sortDesc)
       .subscribe(result => {
         this.totalRecords = result.data.totalRecords;
         this.reservations = result.data.outcome;
@@ -39,7 +90,7 @@ export class ReservationListComponent implements AfterViewInit {
     this.paginator?.page.pipe(
       switchMap(() => {
         let currentPage = (this.paginator?.pageIndex ?? 0) + 1;
-        return this.reservationService.getReservations(currentPage, (this.paginator?.pageSize ?? 0));
+        return this.reservationService.getReservations(currentPage, (this.paginator?.pageSize ?? 10));
       }),
       map(result => {
         if (!result) {
@@ -73,5 +124,4 @@ export class ReservationListComponent implements AfterViewInit {
         console.log(result.data);
       })
   }
-
 }

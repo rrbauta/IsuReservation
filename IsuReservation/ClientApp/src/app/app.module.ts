@@ -17,6 +17,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {StarRatingComponent} from "./star-rating/star-rating.component";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
     MatIconModule,
     MatFormFieldModule,
     MatTooltipModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule
   ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]
