@@ -37,7 +37,8 @@ public interface IContactManager
     /// <param name="page"></param>
     /// <param name="recordsPerPage"></param>
     /// <returns></returns>
-    public Task<IsuResponse<Paging<ContactViewModel>>> List(string sortBy, bool sortDesc, int page, int recordsPerPage);
+    public Task<IsuResponse<Paging<ContactViewModel>>>
+        List(string? sortBy, bool sortDesc, int page, int recordsPerPage);
 
     /// <summary>
     ///     Find contact by name

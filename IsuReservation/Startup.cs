@@ -23,7 +23,7 @@ public class Startup
         services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
 
         services.AddDbContext<AppDbContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         #region Business layer
 

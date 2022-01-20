@@ -142,7 +142,7 @@ public class ReservationManager : IReservationManager
     ///     List contact and filter by name
     /// </summary>
     /// <returns></returns>
-    public async Task<IsuResponse<Paging<ReservationViewModel>>> List(string sortBy, bool sortDesc, int page,
+    public async Task<IsuResponse<Paging<ReservationViewModel>>> List(string? sortBy, bool sortDesc, int page,
         int recordsPerPage)
     {
         var reservations = _dbContext.Reservations.ToList();

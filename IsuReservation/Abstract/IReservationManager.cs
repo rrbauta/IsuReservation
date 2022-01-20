@@ -29,6 +29,6 @@ public interface IReservationManager
     /// <param name="page"></param>
     /// <param name="recordsPerPage"></param>
     /// <returns></returns>
-    public Task<IsuResponse<Paging<ReservationViewModel>>> List(string sortBy, bool sortDesc, int page,
+    public Task<IsuResponse<Paging<ReservationViewModel>>> List(string? sortBy, bool sortDesc, int page,
         int recordsPerPage);
 }

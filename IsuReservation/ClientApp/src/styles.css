@@ -1,6 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+
 a {
   color: #0366d6;
 }
@@ -13,4 +17,103 @@ code {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/*------------------------------data table---------------------------*/
+.table {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.table td, .table th {
+  padding: .75rem;
+  border-top: 10px solid #dee2e6;
+  border-color: #f8f8f8;
+  font-size: 12px;
+  height: border-box;
+  alignment: center;
+  background-color: #d6d8db;
+}
+
+table.dataTable.no-footer {
+  width: 100% !important;
+  border-bottom: 0px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  box-sizing: border-box;
+  display: inline-block;
+  min-width: 1.5em;
+  padding: 0.5em 1em;
+  margin-left: 2px;
+  text-align: center;
+  text-decoration: none !important;
+  cursor: pointer;
+  *cursor: hand;
+  color: #333 !important;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  font-size: 12px;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+  color: #333 !important;
+  border: 1px solid #979797;
+  background-color: white !important;
+
+}
+
+table.dataTable.no-footer {
+  border-bottom: 0px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+  float: left !important;
+  text-align: right;
+  padding-top: 0.25em;
+}
+
+.hidden-favorites {
+  text-align: right;
+}
+
+
+.td-internal-image {
+  margin-left: 0px;
+}
+
+.table-responsive {
+  display: table;
+}
+
+.table td button, .table th button {
+  background-color: gray;
+  color: white;
+  font-size: 12px;
+  align-content: center;
+  width: max-content;
+  float: right;
+  text-transform: uppercase
+}
+
+#table_id_length, #table_id_filter, #table_id_info {
+  display: none;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }

@@ -118,7 +118,7 @@ public class ContactManager : IContactManager
     /// <param name="page"></param>
     /// <param name="recordsPerPage"></param>
     /// <returns></returns>
-    public async Task<IsuResponse<Paging<ContactViewModel>>> List(string sortBy, bool sortDesc, int page,
+    public async Task<IsuResponse<Paging<ContactViewModel>>> List(string? sortBy, bool sortDesc, int page,
         int recordsPerPage)
     {
         var contacts = _dbContext.Contacts.ToList();

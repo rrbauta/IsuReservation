@@ -127,7 +127,7 @@ public class ReservationController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<Paging<ContactViewModel>>> List([FromQuery] string sortBy = "date",
+    public async Task<ActionResult<Paging<ContactViewModel>>> List([FromQuery] string? sortBy = "date",
         [FromQuery] bool sortDesc = false, [FromQuery] int page = 1, [FromQuery] int recordsPerPage = 10)
     {
         _logger.LogInformation("Get reservation list to show in table");
