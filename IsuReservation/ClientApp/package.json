@@ -30,6 +30,7 @@
     "css-has-pseudo": "^3.0.3",
     "jquery": "^3.5.1",
     "magic-string": "^0.25.7",
+    "moment": "^2.29.1",
     "oidc-client": "^1.11.5",
     "popper.js": "^1.16.0",
     "postcss-dir-pseudo-class": "^6.0.3",

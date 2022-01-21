@@ -37,7 +37,7 @@ public class ContactManager : IContactManager
             var nameToFind = Regex.Replace(request.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
                 .ToLower();
 
-            contact = _dbContext.Contacts.FirstOrDefault(u => Regex
+            contact = _dbContext.Contacts.ToList().FirstOrDefault(u => Regex
                 .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
                 .ToLower() == nameToFind);
         }
@@ -45,19 +45,24 @@ public class ContactManager : IContactManager
         if (contact != default)
             return new IsuResponse<ContactViewModel>(MessageResource.ContactAlreadyExist);
 
+        var contactType = _dbContext.ContactTypes.FirstOrDefault(ct => ct.Id == request.ContactTypeId);
+        if (contactType == default)
+            return new IsuResponse<ContactViewModel>(MessageResource.ContactTypeNotFound);
+
         contact = new Contact
         {
             Name = request.Name,
-            BirthDate = request.BirthDate,
+            BirthDate = DateTime.Parse(request.BirthDate),
             ContactTypeId = request.ContactTypeId,
             PhoneNumber = request.PhoneNumber,
             Reservations = new List<Reservation>()
         };
 
+        var result = ContactHelper.ConvertContactToViewModel(contact, contactType);
         _dbContext.Add(contact);
         await _dbContext.SaveChangesAsync();
 
-        return new IsuResponse<ContactViewModel>(ContactHelper.ConvertContactToViewModel(contact));
+        return new IsuResponse<ContactViewModel>(result);
     }
 
     /// <summary>
@@ -85,7 +90,8 @@ public class ContactManager : IContactManager
         if (request.ContactTypeId != default)
             contact.ContactTypeId = request.ContactTypeId;
 
-        contact.BirthDate = request.BirthDate;
+        if (!string.IsNullOrEmpty(request.BirthDate))
+            contact.BirthDate = DateTime.Parse(request.BirthDate);
 
         _dbContext.Update(contact);
         await _dbContext.SaveChangesAsync();
@@ -104,10 +110,11 @@ public class ContactManager : IContactManager
         if (contact == default)
             return new IsuResponse<ContactViewModel>(MessageResource.ContactNotFound);
 
+        var result = ContactHelper.ConvertContactToViewModel(contact);
         _dbContext.Remove(contact);
         await _dbContext.SaveChangesAsync();
 
-        return new IsuResponse<ContactViewModel>(ContactHelper.ConvertContactToViewModel(contact));
+        return new IsuResponse<ContactViewModel>(result);
     }
 
     /// <summary>
@@ -182,6 +189,18 @@ public class ContactManager : IContactManager
         return new IsuResponse<Paging<ContactViewModel>>(response);
     }
 
+    public async Task<IsuResponse<ContactViewModel>> GetContactById(Guid contactId)
+    {
+        if (contactId == default)
+            return new IsuResponse<ContactViewModel>(MessageResource.ContactNotFound);
+
+        var contact = _dbContext.Contacts.FirstOrDefault(u => u.Id == contactId);
+        if (contact == default)
+            return new IsuResponse<ContactViewModel>(MessageResource.ContactNotFound);
+
+        return new IsuResponse<ContactViewModel>(ContactHelper.ConvertContactToViewModel(contact));
+    }
+
     /// <summary>
     ///     Find contact by name
     /// </summary>
@@ -228,5 +247,12 @@ public class ContactManager : IContactManager
         var contact = _dbContext.Contacts.FirstOrDefault(u => u.Id == contactId);
 
         return contact;
+    }
+
+    public async Task<IsuResponse<List<ContactTypeViewModel>>> ContactTypeList()
+    {
+        var contactTypes = _dbContext.ContactTypes.ToList();
+
+        return new IsuResponse<List<ContactTypeViewModel>>(ContactHelper.ConvertContactTypeToViewModel(contactTypes));
     }
 }

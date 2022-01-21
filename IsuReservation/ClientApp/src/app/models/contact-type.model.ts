@@ -1,6 +1,10 @@
-export class ContactType
+export interface ContactType {
+  id: number,
+  name: string
+}
 
-.
-Model
-{
+export interface ContactTypeResponse {
+  data: ContactType[];
+  exception: string;
+  isSuccess: boolean
 }

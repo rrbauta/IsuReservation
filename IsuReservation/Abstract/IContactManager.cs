@@ -41,6 +41,13 @@ public interface IContactManager
         List(string? sortBy, bool sortDesc, int page, int recordsPerPage);
 
     /// <summary>
+    ///     Get Contact
+    /// </summary>
+    /// <param name="contactId"></param>
+    /// <returns></returns>
+    public Task<IsuResponse<ContactViewModel>> GetContactById(Guid contactId);
+
+    /// <summary>
     ///     Find contact by name
     /// </summary>
     /// <param name="name"></param>
@@ -60,4 +67,10 @@ public interface IContactManager
     /// <param name="contactId"></param>
     /// <returns></returns>
     public Contact? FindContact(Guid contactId);
+
+    /// <summary>
+    ///     Contact Type list. Return all contact types
+    /// </summary>
+    /// <returns></returns>
+    public Task<IsuResponse<List<ContactTypeViewModel>>> ContactTypeList();
 }

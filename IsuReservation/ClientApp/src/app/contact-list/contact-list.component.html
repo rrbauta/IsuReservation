@@ -2,68 +2,76 @@
                   [subtitle]="subtitle"
                   [title]="title"></app-menu-options>
 
-<div *ngIf="dataSource.data.length>0" class="container">
+<mat-sidenav-container>
+  <mat-sidenav-content>
 
-  <div class="mat-elevation-z1">
+    <div *ngIf="dataSource.data.length>0" class="container">
 
-    <table [dataSource]="dataSource" class="table" mat-table
-           matSort matSortActive="created" matSortDirection="desc" matSortDisableClear>
-      <ng-container matColumnDef="name">
-        <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="name">Name</th>
-        <td *matCellDef="let row" mat-cell>
-          {{row.name}}
-        </td>
-      </ng-container>
+      <div class="mat-elevation-z1">
 
-      <ng-container matColumnDef="contactTypeName">
-        <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="contactTypeName">Contact Type</th>
-        <td *matCellDef="let row" mat-cell>
-          {{row.contactTypeName}}
-        </td>
-      </ng-container>
+        <table [dataSource]="dataSource" class="table" mat-table
+               matSort matSortActive="created" matSortDirection="desc" matSortDisableClear>
+          <ng-container matColumnDef="name">
+            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="name">Name</th>
+            <td *matCellDef="let row" mat-cell>
+              {{row.name}}
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="birthDate">
-        <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="birthDate">BirthDate</th>
-        <td *matCellDef="let row" mat-cell>
-          {{row.birthDate}}
-        </td>
-      </ng-container>
+          <ng-container matColumnDef="contactTypeName">
+            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="contactTypeName">Contact Type</th>
+            <td *matCellDef="let row" mat-cell>
+              {{row.contactTypeName}}
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="phoneNumber">
-        <th *matHeaderCellDef i18n mat-header-cell>Phone Number</th>
-        <td *matCellDef="let row" mat-cell>
-          {{row.phoneNumber}}
-        </td>
-      </ng-container>
+          <ng-container matColumnDef="birthDate">
+            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="birthDate">BirthDate</th>
+            <td *matCellDef="let row" mat-cell>
+              {{row.birthDate}}
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
-        <td *matCellDef="let row" mat-cell>
+          <ng-container matColumnDef="phoneNumber">
+            <th *matHeaderCellDef i18n mat-header-cell>Phone Number</th>
+            <td *matCellDef="let row" mat-cell>
+              {{row.phoneNumber}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef i18n mat-header-cell></th>
+            <td *matCellDef="let row" mat-cell>
                   <span>
-                     <button class="btn-rounded" i18n>Delete</button>
+                     <button (click)="openDialog(row.id)" class="btn-rounded" i18n>Delete</button>
                   </span>
-          <button class="btn-rounded" i18n style="margin-right: 5px">Edit</button>
-        </td>
-      </ng-container>
+              <button [routerLink]="['/contact-edit', row.id]" class="btn-rounded" i18n style="margin-right: 5px">Edit
+              </button>
+            </td>
+          </ng-container>
 
-      <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row></tr>
-    </table>
+          <tr *matHeaderRowDef="columnsToDisplay" mat-header-row></tr>
+          <tr *matRowDef="let row; columns: columnsToDisplay;" mat-row></tr>
+        </table>
 
-    <mat-paginator
-            (page)="pageChanged($event)"
-            [length]="totalRecords"
-            [pageIndex]="currentPage"
-            [pageSizeOptions]="pageSizeOptions"
-            [pageSize]="pageSize"
-            showFirstLastButtons
-    >
-    </mat-paginator>
-  </div>
+        <mat-paginator
+          (page)="pageChanged($event)"
+          [length]="totalRecords"
+          [pageIndex]="currentPage"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize"
+          showFirstLastButtons
+        >
+        </mat-paginator>
+      </div>
 
-  <br><br>
-</div>
+      <br><br>
+    </div>
 
-<div *ngIf="dataSource.data.length==0" class="container">
-  <span i18n>No data available</span>
-</div>
+    <div *ngIf="dataSource.data.length==0" class="container">
+      <span i18n>No data available</span>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

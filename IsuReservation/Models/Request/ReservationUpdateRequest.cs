@@ -35,7 +35,7 @@ public class ReservationUpdateRequest
     /// <summary>
     ///     Contact birthdate
     /// </summary>
-    public DateTime ContactBirthDate { get; set; }
+    public string ContactBirthDate { get; set; }
 
     /// <summary>
     ///     Contact type identifier

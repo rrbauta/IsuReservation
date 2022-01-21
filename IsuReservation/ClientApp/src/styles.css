@@ -3,7 +3,38 @@
 /* Provide sufficient contrast against white background */
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
+form {
+  margin: 35px auto 100px;
+  display: block;
+  float: none;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+.misc-bottom-padding {
+  margin: 8px 0 20px;
+}
+
+.misc-bottom-padding mat-label {
+  margin-right: 15px;
+}
+
+.mat-radio-label {
+  margin: 0 15px 0 0;
+}
+
+.title-center {
+  margin: 0 auto;
+}
+
+.button-wrapper {
+  margin-top: 10px;
+}
 
 a {
   color: #0366d6;
@@ -82,6 +113,18 @@ html {
   margin-bottom: 5px;
 }
 
+.btn-form {
+  border: 1px solid #bc0001;;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bolder;
+  background-color: #bc0001;;
+  color: white;
+  padding: 5px;
+  width: 100px;
+  margin: 10px;
+}
+
 .destination-image {
   max-width: 100px;
   padding: 3px;
@@ -106,10 +149,86 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   position: relative;
 }
 
-.fontuser i {
-  position: absolute;
-  left: 5%;
-  top: 20%;
+/*-----Mat Form Fields-------*/
+mat-form-field.mat-form-field {
+  font-size: 14px;
+}
+
+mat-icon {
   color: #dee2e6;
-  font-size: x-large;
+  font-size: medium;
+}
+
+.mat-datepicker-toggle {
+  color: #dee2e6;
+  font-size: medium;
+}
+
+/*----------Messages-----------------*/
+.mat-simple-snack-bar-content {
+  padding-left: 5px;
+}
+
+.mat-snack-bar-container {
+  display: -webkit-box !important;
+}
+
+.my-notify-info, .my-notify-success, .my-notify-warning, .my-notify-error {
+  padding: 10px;
+  margin: 10px 0;
+
+}
+
+.my-notify-info:before, .my-notify-success:before, .my-notify-warning:before, .my-notify-error:before {
+  font-family: FontAwesome;
+  font-style: normal;
+  font-weight: 400;
+  speak: none;
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1em;
+  margin-left: .2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale
+}
+
+.my-notify-info:before {
+  content: "\f05a";
+}
+
+.my-notify-success:before {
+  content: '\f00c';
+}
+
+.my-notify-warning:before {
+  content: '\f071';
+}
+
+.my-notify-error:before {
+  content: '\f057';
+}
+
+.my-notify-info {
+  color: #00529B;
+  background-color: #BDE5F8;
+}
+
+.my-notify-success {
+  color: #4F8A10;
+  background-color: #DFF2BF;
+}
+
+.my-notify-warning {
+  color: #9F6000;
+  background-color: #FEEFB3;
+}
+
+.my-notify-error {
+  color: #D8000C;
+  background-color: #FFD2D2;
 }

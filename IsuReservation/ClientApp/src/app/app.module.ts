@@ -20,11 +20,26 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {ContactListComponent} from "./contact-list/contact-list.component";
-import {MenuOptionsComponent} from "./menu-options/menu-options.component";
 import {MatSortModule} from "@angular/material/sort";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ContactCreateComponent} from "./contact-create/contact-create.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatRadioModule} from "@angular/material/radio";
+import {MatCardModule} from "@angular/material/card";
+import {MatInputModule} from "@angular/material/input";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatSidenavModule} from "@angular/material/sidenav";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatDividerModule} from "@angular/material/divider";
+import {MyTelInput} from "./custom-components/custom-phone-input/custom-phone-input.component";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {ConfirmationDialogComponent} from "./custom-components/confirmation-dialog/confirmation-dialog.component";
+import {MatDialogModule} from "@angular/material/dialog";
+import {ContactEditComponent} from "./contact-edit/contact-edit.component";
+import {MenuOptionsComponent} from "./custom-components/menu-options/menu-options.component";
 
 @NgModule({
+  entryComponents: [ContactCreateComponent],
   declarations: [
     AppComponent,
     HomeComponent,
@@ -32,7 +47,11 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     ReservationListComponent,
     StarRatingComponent,
     ContactListComponent,
-    MenuOptionsComponent
+    ContactCreateComponent,
+    ContactEditComponent,
+    MenuOptionsComponent,
+    MyTelInput,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -43,6 +62,8 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'reservations', component: ReservationListComponent},
       {path: 'contacts', component: ContactListComponent},
+      {path: 'contact-create', component: ContactCreateComponent},
+      {path: 'contact-edit/:id', component: ContactEditComponent},
     ]),
     MatTableModule,
     MatPaginatorModule,
@@ -55,7 +76,17 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatSelectModule,
     MatProgressBarModule,
     MatSortModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatRadioModule,
+    MatCardModule,
+    MatInputModule,
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatChipsModule,
+    MatDividerModule,
+    MatButtonToggleModule,
+    MatDialogModule
   ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]

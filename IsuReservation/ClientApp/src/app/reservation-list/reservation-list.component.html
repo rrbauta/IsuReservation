@@ -2,91 +2,96 @@
                   [subtitle]="subtitle"
                   [title]="title"></app-menu-options>
 
-<div *ngIf="dataSource.data.length>0" class="container">
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <div *ngIf="dataSource.data.length>0" class="container">
 
-  <div class="col-lg-3 col-sm-12 col-md-3">
-    <mat-form-field class="fontuser">
-      <mat-select (selectionChange)="sortChange($event.value)" [(value)]="sortOption" required>
-        <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
-          {{ opt.text }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
+      <div class="col-lg-3 col-sm-12 col-md-3">
+        <mat-form-field class="fontuser">
+          <mat-select (selectionChange)="sortChange($event.value)" [(value)]="sortOption" required>
+            <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
+              {{ opt.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-  <div class="mat-elevation-z2">
-    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-    <table [dataSource]="dataSource" class="table" mat-table>
-      <ng-container matColumnDef="image">
-        <th *matHeaderCellDef mat-header-cell></th>
-        <td *matCellDef="let row" mat-cell>
-          <img alt="{{row.destination.name}}" class="destination-image"
-               src="../../assets/images/{{ row.destination.image }}">
-        </td>
-      </ng-container>
+      <div class="mat-elevation-z2">
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        <table [dataSource]="dataSource" class="table" mat-table>
+          <ng-container matColumnDef="image">
+            <th *matHeaderCellDef mat-header-cell></th>
+            <td *matCellDef="let row" mat-cell>
+              <img alt="{{row.destination.name}}" class="destination-image"
+                   src="../../assets/images/{{ row.destination.image }}">
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="name">
-        <th *matHeaderCellDef i18n mat-header-cell>Name</th>
-        <td *matCellDef="let row" mat-cell>
+          <ng-container matColumnDef="name">
+            <th *matHeaderCellDef i18n mat-header-cell>Name</th>
+            <td *matCellDef="let row" mat-cell>
           <span>
               <strong>
                 {{ row.destination.name }}
               </strong>
             </span>
-          <div class="hidden-text">
-            <span i18n>{{ row.date }} at {{ row.time }}</span>
-          </div>
-        </td>
-      </ng-container>
+              <div class="hidden-text">
+                <span i18n>{{ row.date }} at {{ row.time }}</span>
+              </div>
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="rating">
-        <th *matHeaderCellDef i18n mat-header-cell>Rating</th>
-        <td *matCellDef="let row" mat-cell>
-          <div i18n>Ranking</div>
-          <mat-star-rating (ratingUpdated)="onRatingChanged($event)" [id]="row.id"
-                           [rating]="row.destination.rating"></mat-star-rating>
-        </td>
-      </ng-container>
+          <ng-container matColumnDef="rating">
+            <th *matHeaderCellDef i18n mat-header-cell>Rating</th>
+            <td *matCellDef="let row" mat-cell>
+              <div i18n>Ranking</div>
+              <mat-star-rating (ratingUpdated)="onRatingChanged($event)" [id]="row.id"
+                               [rating]="row.destination.rating"></mat-star-rating>
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="favorite">
-        <th *matHeaderCellDef i18n mat-header-cell>Favorite</th>
-        <td *matCellDef="let row" mat-cell>
-          <span (click)="setFavorite(row.destination.id, row.id)" i18n style="cursor: pointer">Add Favorites</span>
+          <ng-container matColumnDef="favorite">
+            <th *matHeaderCellDef i18n mat-header-cell>Favorite</th>
+            <td *matCellDef="let row" mat-cell>
+              <span (click)="setFavorite(row.destination.id, row.id)" i18n style="cursor: pointer">Add Favorites</span>
 
-          <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="row.destination.favorite"
-               alt="" class="favorite-image"
-               src="../../assets/images/favorite-heart-icon-active.png">
+              <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="row.destination.favorite"
+                   alt="" class="favorite-image"
+                   src="../../assets/images/favorite-heart-icon-active.png">
 
-          <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="!row.destination.favorite"
-               alt="" class="favorite-image"
-               src="../../assets/images/favorite-heart-icon-disabled.png">
-        </td>
-      </ng-container>
+              <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="!row.destination.favorite"
+                   alt="" class="favorite-image"
+                   src="../../assets/images/favorite-heart-icon-disabled.png">
+            </td>
+          </ng-container>
 
-      <ng-container matColumnDef="actions">
-        <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
-        <td *matCellDef="let row" mat-cell>
-          <button class="btn-rounded" i18n onclick="">Edit</button>
-        </td>
-      </ng-container>
+          <ng-container matColumnDef="actions">
+            <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
+            <td *matCellDef="let row" mat-cell>
+              <button class="btn-rounded" i18n onclick="">Edit</button>
+            </td>
+          </ng-container>
 
-      <!--        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
-      <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
-    </table>
+          <!--        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>-->
+          <tr *matRowDef="let row; columns: columnsToDisplay" mat-row></tr>
+        </table>
 
-    <mat-paginator
-      [length]="totalRecords"
-      (page)="pageChanged($event)"
-      [pageIndex]="currentPage"
-      [pageSizeOptions]="pageSizeOptions"
-      [pageSize]="pageSize"
-      showFirstLastButtons
-    >
-    </mat-paginator>
-  </div>
-  <br><br>
-</div>
+        <mat-paginator
+          (page)="pageChanged($event)"
+          [length]="totalRecords"
+          [pageIndex]="currentPage"
+          [pageSizeOptions]="pageSizeOptions"
+          [pageSize]="pageSize"
+          showFirstLastButtons
+        >
+        </mat-paginator>
+      </div>
+      <br><br>
+    </div>
 
-<div *ngIf="dataSource.data.length==0" class="container">
-  <span i18n>No data available</span>
-</div>
+    <div *ngIf="dataSource.data.length==0" class="container">
+      <span i18n>No data available</span>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

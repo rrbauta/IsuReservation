@@ -146,5 +146,17 @@ namespace IsuReservation.Resources {
                 return ResourceManager.GetString("InvalidRankingValue", resourceCulture);
             }
         }
+        
+        internal static string InvalidPhoneNumber {
+            get {
+                return ResourceManager.GetString("InvalidPhoneNumber", resourceCulture);
+            }
+        }
+        
+        internal static string ContactTypeNotFound {
+            get {
+                return ResourceManager.GetString("ContactTypeNotFound", resourceCulture);
+            }
+        }
     }
 }

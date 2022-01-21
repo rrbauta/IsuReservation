@@ -3,6 +3,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {Contact} from "../models/contact.model";
 import {ContactService} from "../services/contact.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ConfirmationDialogComponent} from "../custom-components/confirmation-dialog/confirmation-dialog.component";
+import {NotificationsService} from "../services/notifications.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-contact-list',
@@ -30,7 +34,8 @@ export class ContactListComponent implements OnInit {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private contactService: ContactService) {
+  constructor(private notificationService: NotificationsService, private contactService: ContactService, private dialog: MatDialog,
+              private router: Router) {
   }
 
   ngAfterViewInit() {
@@ -42,7 +47,6 @@ export class ContactListComponent implements OnInit {
   }
 
   pageChanged(event: PageEvent) {
-    console.log({event});
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.loadData();
@@ -52,18 +56,58 @@ export class ContactListComponent implements OnInit {
     this.isLoading = true;
 
     this.contactService.getContacts(this.currentPage + 1, this.pageSize, this.sortBy, this.sortDesc)
-        .subscribe(result => {
-          this.dataSource.data = result.data.outcome;
-          console.log(result)
-          setTimeout(() => {
-            this.paginator.pageIndex = this.currentPage;
-            this.paginator.length = result.data.totalRecords;
-            this.totalRecords = result.data.totalRecords;
-          });
-          this.isLoading = false;
-        }, error => {
-          console.log(error);
-          this.isLoading = false;
-        })
+      .subscribe(result => {
+        this.dataSource.data = result.data.outcome;
+
+        setTimeout(() => {
+          this.paginator.pageIndex = this.currentPage;
+          this.paginator.length = result.data.totalRecords;
+          this.totalRecords = result.data.totalRecords;
+        });
+        this.isLoading = false;
+      }, error => {
+        console.log(error);
+        this.isLoading = false;
+      })
   }
+
+  openDialog(contactId: string) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to delete this element?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.deleteContact(contactId);
+        const a = document.createElement('a');
+        a.click();
+        a.remove();
+      }
+    });
+  }
+
+  deleteContact(contactId: string) {
+    this.isLoading = true;
+    this.contactService.delete(contactId)
+      .subscribe(result => {
+        if (result.isSuccess) {
+          this.notificationService.success('Contact removed successfully');
+          this.loadData();
+
+        } else {
+          this.notificationService.error(result.exception);
+        }
+      }, error => {
+        console.log(error);
+        this.isLoading = false;
+        this.notificationService.error(error.error.errorDescription);
+      })
+  }
+
 }

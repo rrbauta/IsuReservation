@@ -1,4 +1,5 @@
 using System.Globalization;
+using System.Text.RegularExpressions;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
 using IsuReservation.Resources;
@@ -20,7 +21,7 @@ public class ContactUpdateRequest
     /// <summary>
     ///     Contact Birth Date. Must be greater than 18 years old
     /// </summary>
-    public DateTime BirthDate { get; set; }
+    public string BirthDate { get; set; }
 
     /// <summary>
     ///     Contact type identifier
@@ -29,16 +30,22 @@ public class ContactUpdateRequest
 
     public IsuResponse<ContactViewModel> Validate()
     {
-        if (BirthDate == default)
+        if (!string.IsNullOrEmpty(BirthDate))
+        {
+            if (!DateTime.TryParse(BirthDate.ToString(CultureInfo.CurrentCulture), out _))
+                return new IsuResponse<ContactViewModel>(MessageResource.InvalidDate);
+
+            var dateTmp = Convert.ToDateTime(BirthDate);
+
+            if (dateTmp.AddYears(18) > DateTime.Today)
+                return new IsuResponse<ContactViewModel>(MessageResource.AgeOlderThan18);
+        }
+
+        if (string.IsNullOrEmpty(PhoneNumber))
             return new IsuResponse<ContactViewModel>(new ContactViewModel());
 
-        if (!DateTime.TryParse(BirthDate.ToString(CultureInfo.CurrentCulture), out _))
-            return new IsuResponse<ContactViewModel>(MessageResource.InvalidDate);
-
-        var dateTmp = Convert.ToDateTime(BirthDate);
-
-        if (dateTmp.AddYears(18) > DateTime.Today)
-            return new IsuResponse<ContactViewModel>(MessageResource.AgeOlderThan18);
+        if (!Regex.Match(PhoneNumber, @"^\d{1,3}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}$").Success)
+            return new IsuResponse<ContactViewModel>(MessageResource.InvalidPhoneNumber);
 
         return new IsuResponse<ContactViewModel>(new ContactViewModel());
     }

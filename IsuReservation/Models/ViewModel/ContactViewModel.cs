@@ -20,7 +20,7 @@ public class ContactViewModel
     /// <summary>
     ///     Contact Birth Date.
     /// </summary>
-    public DateTime BirthDate { get; set; }
+    public string BirthDate { get; set; }
 
     /// <summary>
     ///     Contact type identifier

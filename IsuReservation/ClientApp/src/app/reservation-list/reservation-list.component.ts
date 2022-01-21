@@ -51,7 +51,6 @@ export class ReservationListComponent {
   }
 
   pageChanged(event: PageEvent) {
-    console.log({event});
     this.pageSize = event.pageSize;
     this.currentPage = event.pageIndex;
     this.loadData();
@@ -63,7 +62,7 @@ export class ReservationListComponent {
     this.reservationService.getReservations(this.currentPage + 1, this.pageSize, this.sortBy, this.sortDesc)
       .subscribe(result => {
         this.dataSource.data = result.data.outcome;
-        console.log(result)
+
         setTimeout(() => {
           this.paginator.pageIndex = this.currentPage;
           this.paginator.length = result.data.totalRecords;
@@ -77,7 +76,6 @@ export class ReservationListComponent {
   }
 
   sortChange(option: number) {
-    console.log(option);
     switch (option) {
       case 1: {
         this.sortBy = 'date';
@@ -116,14 +114,13 @@ export class ReservationListComponent {
 
   onRatingChanged(event: any) {
     this.isLoading = true;
-    console.log('my rating ' + event.id);
+
     let index = this.dataSource.data.findIndex(element => element.id == event.id);
     let reservation = this.dataSource.data[index];
 
     this.destinationService.ranking(reservation.destination.id, event.rating)
       .subscribe(result => {
         this.dataSource.data[index].destination = result.data;
-        console.log(result);
         this.isLoading = false;
       }, error => {
         console.log(error);
@@ -135,11 +132,9 @@ export class ReservationListComponent {
     this.isLoading = true;
     let index = this.dataSource.data.findIndex(element => element.id === reservationId);
 
-    console.log(index);
     this.destinationService.favorite(id)
       .subscribe(result => {
         this.dataSource.data[index].destination = result.data;
-        console.log(result.data);
         this.isLoading = false;
       }, error => {
         console.log(error);

@@ -45,7 +45,7 @@ public class ContactController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Create([FromForm] ContactRequest requestModel)
+    public async Task<IActionResult> Create([FromBody] ContactRequest requestModel)
     {
         _logger.LogInformation("Create contact using data: {Request}", JsonConvert.SerializeObject(requestModel));
 
@@ -92,7 +92,7 @@ public class ContactController : ControllerBase
     [Route("{contactId:guid}")]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Update([FromForm] ContactUpdateRequest requestModel, [FromRoute] Guid contactId)
+    public async Task<IActionResult> Update([FromBody] ContactUpdateRequest requestModel, [FromRoute] Guid contactId)
     {
         _logger.LogInformation("Update contact using data: {Request}", JsonConvert.SerializeObject(requestModel));
 
@@ -195,6 +195,44 @@ public class ContactController : ControllerBase
     }
 
     /// <summary>
+    ///     Get Contact by identifier
+    /// </summary>
+    /// <returns>Return a contact.</returns>
+    [HttpGet]
+    [Route("{contactId:guid}")]
+    [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<Paging<ContactViewModel>>> GetContactById([FromRoute] Guid contactId)
+    {
+        _logger.LogInformation("Get contact to show in table");
+
+        try
+        {
+            var response = await _contactManager.GetContactById(contactId);
+
+            if (response.IsSuccess)
+            {
+                _logger.LogInformation(
+                    "Get contact finish: {Response}", JsonConvert.SerializeObject(response));
+
+                return Ok(response);
+            }
+
+            _logger.LogError("Get contact failed: {Response}",
+                JsonConvert.SerializeObject(response));
+
+            return BadRequest(new IsuErrorResponse(response.Exception.Message));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(
+                "Get contact. Caught exception: {Error}", JsonConvert.SerializeObject(e));
+
+            return BadRequest(new IsuErrorResponse(MessageResource.UnhandledError));
+        }
+    }
+
+    /// <summary>
     ///     Contact by name to complete reservation form
     /// </summary>
     /// <returns>Return a contact.</returns>
@@ -229,6 +267,47 @@ public class ContactController : ControllerBase
         {
             _logger.LogError(
                 "Get contact by name to complete reservation form failed. Caught exception: {Error}",
+                JsonConvert.SerializeObject(e));
+
+            return BadRequest(new IsuErrorResponse(MessageResource.UnhandledError));
+        }
+    }
+
+
+    /// <summary>
+    ///     Contact type list to used in reservation and contact form
+    /// </summary>
+    /// <returns>Return a contact type list.</returns>
+    [HttpGet]
+    [Route("types")]
+    [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<Paging<ContactViewModel>>> ContactTypeList()
+    {
+        _logger.LogInformation("Get contact type list to show in table");
+
+        try
+        {
+            var response = await _contactManager.ContactTypeList();
+
+            if (response.IsSuccess)
+            {
+                _logger.LogInformation(
+                    "Get contact type  list to show in table finish: {Response}",
+                    JsonConvert.SerializeObject(response));
+
+                return Ok(response);
+            }
+
+            _logger.LogError("Get contact type  list to show in table failed: {Response}",
+                JsonConvert.SerializeObject(response));
+
+            return BadRequest(new IsuErrorResponse(response.Exception.Message));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(
+                "Get contact type  list to show in table failed. Caught exception: {Error}",
                 JsonConvert.SerializeObject(e));
 
             return BadRequest(new IsuErrorResponse(MessageResource.UnhandledError));

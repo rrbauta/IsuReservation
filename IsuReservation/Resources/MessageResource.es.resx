@@ -66,4 +66,10 @@
     <data name="InvalidRankingValue" xml:space="preserve">
         <value>Evaluaciòn invàlida</value>
     </data>
+    <data name="InvalidPhoneNumber" xml:space="preserve">
+        <value>Nùmero de telèfono invàlido</value>
+    </data>
+    <data name="ContactTypeNotFound" xml:space="preserve">
+        <value>Tipo de contacto no encontrado</value>
+    </data>
 </root>
