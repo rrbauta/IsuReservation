@@ -6,7 +6,6 @@ import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
 import {HomeComponent} from './home/home.component';
-import {HeaderComponent} from "./header/header.component";
 import {ReservationListComponent} from "./reservation-list/reservation-list.component";
 import {MatTableModule} from "@angular/material/table";
 import {MatPaginatorModule} from "@angular/material/paginator";
@@ -37,6 +36,7 @@ import {ConfirmationDialogComponent} from "./custom-components/confirmation-dial
 import {MatDialogModule} from "@angular/material/dialog";
 import {ContactEditComponent} from "./contact-edit/contact-edit.component";
 import {MenuOptionsComponent} from "./custom-components/menu-options/menu-options.component";
+import {HeaderComponent} from "./custom-components/header/header.component";
 
 @NgModule({
   entryComponents: [ContactCreateComponent],
