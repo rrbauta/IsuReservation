@@ -19,6 +19,10 @@ import {StarRatingComponent} from "./star-rating/star-rating.component";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {ContactListComponent} from "./contact-list/contact-list.component";
+import {MenuOptionsComponent} from "./menu-options/menu-options.component";
+import {MatSortModule} from "@angular/material/sort";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -26,7 +30,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     HomeComponent,
     HeaderComponent,
     ReservationListComponent,
-    StarRatingComponent
+    StarRatingComponent,
+    ContactListComponent,
+    MenuOptionsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
@@ -35,7 +41,8 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     BrowserAnimationsModule,
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
-      {path: 'reservations-list', component: ReservationListComponent},
+      {path: 'reservations', component: ReservationListComponent},
+      {path: 'contacts', component: ContactListComponent},
     ]),
     MatTableModule,
     MatPaginatorModule,
@@ -46,7 +53,9 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     MatTooltipModule,
     MatSnackBarModule,
     MatSelectModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    MatSortModule,
+    MatProgressSpinnerModule
   ],
   providers: [MatSnackBar],
   bootstrap: [AppComponent]

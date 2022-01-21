@@ -1,78 +1,33 @@
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+/*------------------------------data table---------------------------*/
+.table {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-html {
-  font-size: 14px;
+.table td, .table th {
+  padding: .75rem;
+  border-top: 10px solid #dee2e6;
+  border-color: #f8f8f8;
+  font-size: 12px;
+  height: border-box;
+  alignment: center;
+  background-color: #d6d8db;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.hidden-favorites {
+  text-align: right;
 }
 
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+.td-internal-image {
+  margin-left: 0px;
 }
 
-.back-reservation-list {
-  background-color: lightgray !important;
-}
-
-.banner-label {
-  color: #bf1110;
-  font-size: 20px;
-  vertical-align: middle !important;
-}
-
-.hidden-text {
-  color: gray;
-  font-size: small;
-}
-
-.btn-rounded {
-  border: 1px solid gray;
-  text-transform: uppercase;
-  font-size: 14px;
+.table td button, .table th button {
   background-color: gray;
   color: white;
-  padding: 5px;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
-.fontuser {
-  width: 100%;
-  position: relative;
-  padding: 10px;
-}
-
-.fa-ico {
-  position: absolute;
-  left: 2%;
-  top: -8%;
-  color: #b4b9bf;
-  font-size: larger;
-}
-
-.destination-image {
-  max-width: 100px;
-  padding: 3px;
-}
-
-.favorite-image {
-  max-width: 25px;
-  padding: 3px;
-  cursor: pointer;
-}
-
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-  padding-left: 0;
-}
-
-th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-  vertical-align: middle;
+  font-size: 12px;
+  align-content: center;
+  width: max-content;
+  float: right;
+  text-transform: uppercase
 }

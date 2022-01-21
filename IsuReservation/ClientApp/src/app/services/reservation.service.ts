@@ -7,7 +7,6 @@ import {ReservationPagingModel} from "../models/reservation.paging.model";
   providedIn: 'root'
 })
 export class ReservationService {
-  public reservations: ReservationPagingModel | undefined;
 
   public baseUrl: string;
 

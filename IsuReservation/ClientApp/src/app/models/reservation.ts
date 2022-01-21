@@ -2,7 +2,7 @@ import {Time} from "@angular/common";
 import {Destination} from "./destination.model";
 import {Contact} from "./contact.model";
 
-export interface ReservationModel {
+export interface Reservation {
   id: string;
   description: string;
   date: Date;

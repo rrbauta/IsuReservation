@@ -1,4 +1,4 @@
-import {ReservationModel} from "./reservation.model";
+import {Reservation} from "./reservation";
 import {Destination} from "./destination.model";
 
 export interface ReservationPagingModel {
@@ -9,7 +9,7 @@ export interface ReservationPagingModel {
 
 export interface Data {
   actualPage: number;
-  outcome: ReservationModel[];
+  outcome: Reservation[];
   recordsPerPage: number;
   totalPages: number;
   totalRecords: number;

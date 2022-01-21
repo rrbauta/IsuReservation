@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {ReservationModel} from "../models/reservation.model";
+import {Reservation} from "../models/reservation";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {ReservationService} from "../services/reservation.service";
 import {DestinationService} from "../services/destination.service";
@@ -12,12 +12,15 @@ import {MatTableDataSource} from "@angular/material/table";
 })
 export class ReservationListComponent {
 
+  title: string = "Reservation List";
+  subtitle: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
+  reservation_create_button: boolean = true;
+  contact_list_button: boolean = true;
   columnsToDisplay = ['image', 'name', 'rating', 'favorite', 'actions'];
   totalRecords = 0;
   currentPage = 0;
   pageSize = 5;
   pageSizeOptions: number[] = [5, 10, 25, 100];
-  reservations: ReservationModel[] = [];
   sortBy: string = 'date';
   sortDesc: boolean = false;
   sortOption: number = 0;
@@ -29,8 +32,8 @@ export class ReservationListComponent {
     {'text': 'By Alphabetic Descending', 'value': 4},
     {'text': 'By Ranking', 'value': 5}
   ];
-  ELEMENT_DATA: ReservationModel[] = [];
-  dataSource: MatTableDataSource<ReservationModel> = new MatTableDataSource();
+  ELEMENT_DATA: Reservation[] = [];
+  dataSource: MatTableDataSource<Reservation> = new MatTableDataSource();
   isLoading = false;
 
   @ViewChild(MatPaginator)
