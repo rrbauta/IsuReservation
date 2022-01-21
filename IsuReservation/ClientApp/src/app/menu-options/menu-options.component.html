@@ -1,0 +1,46 @@
+<nav
+  class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+>
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-2 col-sm-12 col-md-6">
+        <label class="banner-label">
+          <b i18n>{{title}}</b>
+        </label>
+      </div>
+
+      <div class="col-lg-6 col-sm-12 col-md-6 hidden-text">
+        <p>
+          {{subtitle}}
+        </p>
+      </div>
+
+      <div *ngIf="reservation_create" class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n routerLink="/reservation-create">
+          Create Reservation
+        </button>
+      </div>
+
+      <div *ngIf="reservation_list" class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n routerLink="/reservations">
+          Reservation List
+        </button>
+      </div>
+
+      <div *ngIf="contact_create" class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n routerLink="/contact-create">
+          Create Contact
+        </button>
+      </div>
+
+      <div *ngIf="contact_list" class="col-lg-2 col-sm-6 col-md-6">
+        <button class="btn-rounded" i18n routerLink="/contacts">
+          Contact List
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+</nav>

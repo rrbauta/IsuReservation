@@ -1,0 +1,25 @@
+/*------------------------------data table---------------------------*/
+.table {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.table td, .table {
+  padding: .75rem;
+  border-top: 10px solid #dee2e6;
+  border-color: #f8f8f8;
+  font-size: 12px;
+  height: border-box;
+  alignment: center;
+  background-color: #d6d8db;
+}
+
+.table td button, .table button {
+  background-color: gray;
+  color: white;
+  font-size: 12px;
+  align-content: center;
+  width: max-content;
+  float: right;
+  text-transform: uppercase
+}
