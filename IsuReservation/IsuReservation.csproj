@@ -33,6 +33,8 @@
     <ItemGroup>
         <!-- Don't publish the SPA source files, but do show them in the project files list -->
         <Content Remove="$(SpaRoot)**"/>
+        <Content Include="ClientApp\src\assets\i18n\en.json"/>
+        <Content Include="ClientApp\src\assets\i18n\es.json"/>
         <None Remove="$(SpaRoot)**"/>
         <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**"/>
     </ItemGroup>
@@ -40,6 +42,7 @@
     <ItemGroup>
         <Folder Include="ClientApp\src\app\custom-components"/>
         <Folder Include="ClientApp\src\assets\images"/>
+        <Folder Include="ClientApp\src\locale"/>
         <Folder Include="Meta"/>
     </ItemGroup>
 

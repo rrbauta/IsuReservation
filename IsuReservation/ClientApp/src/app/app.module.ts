@@ -1,7 +1,7 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {RouterModule} from '@angular/router';
 
 import {AppComponent} from './app.component';
@@ -45,6 +45,13 @@ import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {StarRatingComponent} from "./custom-components/star-rating/star-rating.component";
 import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from "@angular-material-components/datetime-picker";
+import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
+import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+
+// AoT requires an exported function for factories
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   entryComponents: [ContactCreateComponent],
@@ -65,6 +72,14 @@ import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from "@angular-mater
     RichTextEditorComponent
   ],
   imports: [
+    TranslateModule.forRoot({
+      defaultLanguage: 'es',
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
     CKEditorModule,
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
