@@ -9,8 +9,9 @@
 
       <div class="mat-elevation-z1">
 
-        <table [dataSource]="dataSource" class="table" mat-table
-               matSort matSortActive="created" matSortDirection="desc" matSortDisableClear>
+        <table (matSortChange)="sortData($event)" [dataSource]="dataSource" class="table"
+               mat-table matSort matSortActive="created" matSortDirection="asc"
+               matSortDisableClear>
           <ng-container matColumnDef="name">
             <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="name">Name</th>
             <td *matCellDef="let row" mat-cell>
@@ -66,10 +67,6 @@
       </div>
 
       <br><br>
-    </div>
-
-    <div *ngIf="dataSource.data.length==0" class="container">
-      <span i18n>No data available</span>
     </div>
 
   </mat-sidenav-content>

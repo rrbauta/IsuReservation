@@ -7,6 +7,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../custom-components/confirmation-dialog/confirmation-dialog.component";
 import {NotificationsService} from "../services/notifications.service";
 import {Router} from "@angular/router";
+import {Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-contact-list',
@@ -108,6 +109,18 @@ export class ContactListComponent implements OnInit {
         this.isLoading = false;
         this.notificationService.error(error.error.errorDescription);
       })
+  }
+
+  sortData(sort: Sort) {
+    console.log(sort);
+    this.sortDesc = sort.direction === 'asc';
+    this.sortBy = sort.active
+
+    if (sort.active === 'contactTypeName') {
+      this.sortBy = 'contactType'
+    }
+
+    this.loadData();
   }
 
 }
