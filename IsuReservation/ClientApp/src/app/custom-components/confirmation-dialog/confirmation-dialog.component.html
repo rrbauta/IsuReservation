@@ -1,9 +1,10 @@
 <mat-dialog-content>
   <p>
-    {{message}}
+    {{message | translate}}
   </p>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-  <button (click)="onConfirmClick()" color="primary" mat-raised-button tabindex="1">{{confirmButtonText}}</button>
-  <button mat-dialog-close mat-raised-button tabindex="-1">{{cancelButtonText}}</button>
+  <button (click)="onConfirmClick()" color="primary" mat-raised-button
+          tabindex="1">{{confirmButtonText | translate}}</button>
+  <button mat-dialog-close mat-raised-button tabindex="-1">{{cancelButtonText | translate}}</button>
 </mat-dialog-actions>

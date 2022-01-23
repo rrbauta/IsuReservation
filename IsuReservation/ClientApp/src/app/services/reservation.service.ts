@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ReservationPagingModel, ReservationResponse} from "../models/reservation";
 import * as moment from "moment";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,22 @@ export class ReservationService {
 
   public baseUrl: string;
 
-  constructor(private httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private translateService: TranslateService, private httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
   getReservations(page: number = 1, recordsPerPage: number = 10, sortBy: string, sortDesc: boolean): Observable<ReservationPagingModel> {
-    return this.httpClient.get<ReservationPagingModel>(this.baseUrl + `api/reservations?page=${page}&recordsPerPage=${recordsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`);
+    return this.httpClient.get<ReservationPagingModel>(
+      this.baseUrl + `api/reservations?page=${page}&recordsPerPage=${recordsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`,
+      {headers: {'App-Language': this.translateService.currentLang}}
+    );
   }
 
   getReservation(reservationId: string): Observable<ReservationResponse> {
     return this.httpClient.get<ReservationResponse>(
-      this.baseUrl + `api/reservations/${reservationId}`);
+      this.baseUrl + `api/reservations/${reservationId}`,
+      {headers: {'App-Language': this.translateService.currentLang}}
+    );
   }
 
   create(reservation: any): Observable<ReservationResponse> {
@@ -36,7 +42,8 @@ export class ReservationService {
         contactTypeId: reservation.contactTypeId,
         contactId: reservation.contactId,
         destinationId: reservation.destinationId
-      }
+      },
+      {headers: {'App-Language': this.translateService.currentLang}}
     );
   }
 
@@ -52,7 +59,8 @@ export class ReservationService {
         contactTypeId: reservation.contactTypeId,
         contactId: reservation.contactId,
         destinationId: reservation.destinationId
-      }
+      },
+      {headers: {'App-Language': this.translateService.currentLang}}
     );
   }
 }

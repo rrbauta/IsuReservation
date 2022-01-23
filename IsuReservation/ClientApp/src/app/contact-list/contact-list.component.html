@@ -12,40 +12,41 @@
                mat-table matSort matSortActive="created" matSortDirection="asc"
                matSortDisableClear>
           <ng-container matColumnDef="name">
-            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="name">Name</th>
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="name">{{'Name' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
               {{row.name}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="contactTypeName">
-            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="contactTypeName">Contact Type</th>
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="contactTypeName">{{'Contact Type' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
               {{row.contactTypeName}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="birthDate">
-            <th *matHeaderCellDef i18n mat-header-cell mat-sort-header="birthDate">BirthDate</th>
+            <th *matHeaderCellDef mat-header-cell mat-sort-header="birthDate">{{'BirthDate' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
               {{row.birthDate}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="phoneNumber">
-            <th *matHeaderCellDef i18n mat-header-cell>Phone Number</th>
+            <th *matHeaderCellDef mat-header-cell>{{'Phone Number' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
               {{row.phoneNumber}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
+            <th *matHeaderCellDef mat-header-cell>{{'Actions' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
-                  <span>
-                     <button (click)="openDialog(row.id)" class="btn-rounded" i18n>Delete</button>
+                  <span class="btn-actions">
+                     <button (click)="openDialog(row.id)" class="btn-rounded">{{'Delete' | translate}}</button>
                   </span>
-              <button [routerLink]="['/contact-edit', row.id]" class="btn-rounded" i18n style="margin-right: 5px">Edit
+              <button [routerLink]="['/contact-edit', row.id]" class="btn-rounded"
+                      style="margin-right: 5px">{{'Edit' | translate}}
               </button>
             </td>
           </ng-container>

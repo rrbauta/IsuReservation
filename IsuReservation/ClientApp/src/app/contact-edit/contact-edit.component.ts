@@ -5,6 +5,7 @@ import {NotificationsService} from "../services/notifications.service";
 import {ContactService} from "../services/contact.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Contact} from "../models/contact.model";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-contact-edit',
@@ -28,7 +29,7 @@ export class ContactEditComponent implements OnInit {
   contactId: string | null = ''
 
   constructor(private notificationService: NotificationsService, private contactService: ContactService, public fb: FormBuilder,
-              private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router, private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -80,7 +81,7 @@ export class ContactEditComponent implements OnInit {
       this.contactService.update(this.myForm.value, this.contactId)
         .subscribe(result => {
           if (result.isSuccess) {
-            this.notificationService.success('Contact updated successfully');
+            this.notificationService.success(this.translateService.instant('Contact updated successfully'));
             this.router.navigate(['/contacts'])
           } else {
             this.notificationService.error(result.exception);
@@ -88,7 +89,11 @@ export class ContactEditComponent implements OnInit {
           this.isLoading = false;
         }, error => {
           this.isLoading = false;
-          this.notificationService.error(error.error.errorDescription);
+          if (error.error.errorDescription === undefined) {
+            this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+          } else {
+            this.notificationService.error(error.error.errorDescription);
+          }
         })
     }
   }

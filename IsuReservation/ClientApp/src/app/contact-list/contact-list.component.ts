@@ -8,6 +8,7 @@ import {ConfirmationDialogComponent} from "../custom-components/confirmation-dia
 import {NotificationsService} from "../services/notifications.service";
 import {Router} from "@angular/router";
 import {Sort} from "@angular/material/sort";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-contact-list',
@@ -36,7 +37,7 @@ export class ContactListComponent implements OnInit {
   paginator!: MatPaginator;
 
   constructor(private notificationService: NotificationsService, private contactService: ContactService, private dialog: MatDialog,
-              private router: Router) {
+              private router: Router, private translateService: TranslateService) {
   }
 
   ngAfterViewInit() {
@@ -69,19 +70,16 @@ export class ContactListComponent implements OnInit {
       }, error => {
         console.log(error);
         this.isLoading = false;
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 
   openDialog(contactId: string) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        message: 'Are you sure want to delete this element?',
-        buttonText: {
-          ok: 'Yes',
-          cancel: 'No'
-        }
-      }
-    });
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
@@ -98,7 +96,7 @@ export class ContactListComponent implements OnInit {
     this.contactService.delete(contactId)
       .subscribe(result => {
         if (result.isSuccess) {
-          this.notificationService.success('Contact removed successfully');
+          this.notificationService.success(this.translateService.instant('Contact removed successfully'));
           this.loadData();
 
         } else {
@@ -107,7 +105,11 @@ export class ContactListComponent implements OnInit {
       }, error => {
         console.log(error);
         this.isLoading = false;
-        this.notificationService.error(error.error.errorDescription);
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 

@@ -10,6 +10,7 @@ import {debounceTime, delay, filter, map, takeUntil, tap} from "rxjs/operators";
 import {Subject} from "rxjs";
 import {Destination} from "../models/destination.model";
 import {DestinationService} from "../services/destination.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-reservation-create',
@@ -46,11 +47,17 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
   /** Subject that emits when the component has been destroyed. */
   protected _onDestroy = new Subject<void>();
 
+  ckeConfig = {
+    removeButtons: 'Source',
+    language: this.translateService.currentLang
+  };
+
   constructor(private notificationService: NotificationsService,
               private contactService: ContactService,
               private reservationService: ReservationService,
               private destinationService: DestinationService,
-              public fb: FormBuilder, private router: Router) {
+              public fb: FormBuilder, private router: Router,
+              private translateService: TranslateService) {
 
   }
 
@@ -83,7 +90,6 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
       )
       .subscribe(filtered => {
           this.searching = false;
-          // this.filteredServerSideBanks.next(filtered);
         },
         error => {
           // no errors in our simulated example
@@ -110,6 +116,11 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
       }, error => {
         console.log(error);
         this.isLoading = false;
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 
@@ -120,6 +131,11 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
           this.contacts = result.data.outcome;
         }, error => {
           console.log(error);
+          if (error.error.errorDescription === undefined) {
+            this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+          } else {
+            this.notificationService.error(error.error.errorDescription);
+          }
         })
     }
   }
@@ -139,6 +155,11 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
         this.destinations = result.data;
       }, error => {
         console.log(error);
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 
@@ -148,7 +169,7 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.isLoading = false;
         if (result.isSuccess) {
-          this.notificationService.success('Reservation added successfully');
+          this.notificationService.success(this.translateService.instant('Reservation added successfully'));
           this.myForm.reset();
           this.description = '';
         } else {
@@ -156,7 +177,11 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
         }
       }, error => {
         this.isLoading = false;
-        this.notificationService.error(error.error.errorDescription);
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 

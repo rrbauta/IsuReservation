@@ -122,7 +122,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
   ],
-  providers: [MatSnackBar, MatSelect],
+  providers: [MatSnackBar,
+    MatSelect
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

@@ -4,6 +4,8 @@ import {MatPaginator, PageEvent} from "@angular/material/paginator";
 import {ReservationService} from "../services/reservation.service";
 import {DestinationService} from "../services/destination.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {NotificationsService} from "../services/notifications.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-reservation-list',
@@ -39,7 +41,8 @@ export class ReservationListComponent {
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
-  constructor(private reservationService: ReservationService, private destinationService: DestinationService) {
+  constructor(private reservationService: ReservationService, private destinationService: DestinationService,
+              private notificationService: NotificationsService, private translateService: TranslateService) {
   }
 
   ngAfterViewInit() {
@@ -72,6 +75,11 @@ export class ReservationListComponent {
       }, error => {
         console.log(error);
         this.isLoading = false;
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 
@@ -122,9 +130,15 @@ export class ReservationListComponent {
       .subscribe(result => {
         this.dataSource.data[index].destination = result.data;
         this.isLoading = false;
+        this.notificationService.success(this.translateService.instant('Rate updated successfully'));
       }, error => {
         console.log(error);
         this.isLoading = false;
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 
@@ -136,9 +150,18 @@ export class ReservationListComponent {
       .subscribe(result => {
         this.dataSource.data[index].destination = result.data;
         this.isLoading = false;
+        if (result.data.favorite)
+          this.notificationService.success(this.translateService.instant('Add to favorites successfully'));
+        else
+          this.notificationService.success(this.translateService.instant('Remove from favorites successfully'));
       }, error => {
         console.log(error);
         this.isLoading = false;
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 }

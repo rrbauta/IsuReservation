@@ -4,3 +4,9 @@
   height: 150px;
   background-repeat: round;
 }
+
+.language-header {
+  cursor: pointer;
+  width: 35px;
+  height: 35px
+}

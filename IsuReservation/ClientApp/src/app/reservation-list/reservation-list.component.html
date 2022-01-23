@@ -12,7 +12,7 @@
                         class="mat-select-trigger-sortby"
                         required>
               <mat-option *ngFor="let opt of selectOptions" [value]="opt.value">
-                {{ opt.text }}
+                {{ opt.text | translate }}
               </mat-option>
             </mat-select>
             <mat-icon matPrefix>sort</mat-icon>
@@ -31,7 +31,7 @@
             </ng-container>
 
             <ng-container matColumnDef="name">
-              <th *matHeaderCellDef i18n mat-header-cell>Name</th>
+              <th *matHeaderCellDef mat-header-cell>Name</th>
               <td *matCellDef="let row" mat-cell>
           <span>
               <strong>
@@ -39,15 +39,15 @@
               </strong>
             </span>
                 <div class="hidden-text">
-                  <span i18n>{{ row.displayDate }} at {{ row.time }}</span>
+                  <span>{{ row.displayDate }} at {{ row.time }}</span>
                 </div>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="rating">
-              <th *matHeaderCellDef i18n mat-header-cell>Rating</th>
+              <th *matHeaderCellDef mat-header-cell>Rating</th>
               <td *matCellDef="let row" mat-cell>
-                <div i18n>Ranking</div>
+                <div>{{'Ranking' | translate}}</div>
                 <mat-star-rating (ratingUpdated)="onRatingChanged($event)" [id]="row.id"
                                  [rating]="row.destination.rating"
                                  class="material-icons mat-icon-rating"></mat-star-rating>
@@ -55,10 +55,10 @@
             </ng-container>
 
             <ng-container matColumnDef="favorite">
-              <th *matHeaderCellDef i18n mat-header-cell>Favorite</th>
+              <th *matHeaderCellDef mat-header-cell>Favorite</th>
               <td *matCellDef="let row" mat-cell>
-                <span (click)="setFavorite(row.destination.id, row.id)" i18n
-                      style="cursor: pointer">Add Favorites</span>
+                <span (click)="setFavorite(row.destination.id, row.id)"
+                      style="cursor: pointer">{{'Add Favorites' | translate}}</span>
 
                 <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="row.destination.favorite"
                      alt="" class="favorite-image"
@@ -71,9 +71,9 @@
             </ng-container>
 
             <ng-container matColumnDef="actions">
-              <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
+              <th *matHeaderCellDef mat-header-cell>Actions</th>
               <td *matCellDef="let row" mat-cell>
-                <button [routerLink]="['/reservation-edit', row.id]" class="btn-rounded" i18n>Edit</button>
+                <button [routerLink]="['/reservation-edit', row.id]" class="btn-rounded">{{'Edit' | translate}}</button>
               </td>
             </ng-container>
 

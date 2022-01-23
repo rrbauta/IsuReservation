@@ -7,7 +7,7 @@
         <div class="row form-component-wrapper">
           <div class="col-lg-3 col-md-3 col-sm-12">
             <mat-form-field appearance="outline" class="fontuser">
-              <mat-label i18n>Contact Name</mat-label>
+              <mat-label>{{'Name' | translate}}</mat-label>
               <input formControlName="name" matInput required>
               <mat-icon matPrefix>people</mat-icon>
             </mat-form-field>
@@ -15,7 +15,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12">
             <mat-form-field appearance="outline" class="fontuser">
-              <mat-label i18n>Contact Type</mat-label>
+              <mat-label>{{'Contact Type' | translate}}</mat-label>
               <mat-select formControlName="contactType" required>
                 <mat-option *ngFor="let ct of contactTypes" [value]="ct.id">
                   {{ct.name}}
@@ -27,7 +27,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12">
             <mat-form-field appearance="outline" class="fontuser">
-              <mat-label i18n>Phone number</mat-label>
+              <mat-label>{{'Phone number' | translate}}</mat-label>
               <input formControlName="phoneNumber" matInput
                      pattern='^\d{1,3}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}$'>
               <mat-icon matPrefix>phone</mat-icon>
@@ -36,7 +36,7 @@
 
           <div class="col-lg-3 col-md-3 col-sm-12">
             <mat-form-field appearance="outline" class="fontuser">
-              <mat-label i18n>Birth Date</mat-label>
+              <mat-label>{{'BirthDate' | translate}}</mat-label>
               <input [matDatepicker]="picker" formControlName="birthDate" matInput required>
               <mat-datepicker-toggle [for]="picker" matPrefix></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
@@ -44,10 +44,8 @@
           </div>
         </div>
         <div style="text-align: right">
-          <button [disabled]="!myForm.valid" class="btn-form" i18n type="submit">Send</button>
+          <button [disabled]="!myForm.valid" class="btn-form" type="submit">{{'Send' | translate}}</button>
         </div>
-
-
       </form>
     </div>
   </mat-sidenav-content>

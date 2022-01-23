@@ -113,17 +113,6 @@ html {
   font-size: small;
 }
 
-.btn-rounded {
-  border: 1px solid gray;
-  text-transform: uppercase;
-  font-size: 14px;
-  background-color: gray;
-  color: white;
-  padding: 5px;
-  width: 100%;
-  margin-bottom: 5px;
-}
-
 .btn-form {
   border: 1px solid #bc0001;;
   text-transform: uppercase;
@@ -273,7 +262,7 @@ mat-icon {
 .btn-rounded {
   border: 1px solid gray;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 10px;
   background-color: gray;
   color: white;
   padding: 5px;
@@ -329,7 +318,7 @@ mat-icon {
 }
 
 .mat-form-field-appearance-outline-sortby .mat-form-field-infix {
-  padding: 0px 0px 0px 20px;
+  padding: 0 0 0 20px;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
@@ -351,6 +340,7 @@ mat-icon {
 .mat-form-field-prefix .mat-icon, .mat-form-field-suffix .mat-icon {
   font-size: 2.5em;
   line-height: 1em;
+  margin-right: 20px;
 }
 
 .mat-select-trigger-sortby {
@@ -360,6 +350,10 @@ mat-icon {
 
 field-prefix .mat-icon-button .mat-datepicker-toggle-default-icon, .mat-form-field:not(.mat-form-field-appearance-legacy) .mat-form-field-suffix .mat-icon-button .mat-datepicker-toggle-default-icon {
   margin: 0 9px -6px 0;
+}
+
+.mat-paginator-page-size-label {
+  display: none !important;
 }
 
 @media (min-width: 1200px) {

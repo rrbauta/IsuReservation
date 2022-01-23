@@ -4,6 +4,7 @@ import {ContactService} from "../services/contact.service";
 import {ContactType} from "../models/contact-type.model";
 import {Router} from "@angular/router";
 import {NotificationsService} from "../services/notifications.service";
+import {TranslateService} from "@ngx-translate/core";
 
 export interface Subject {
   name: string;
@@ -28,7 +29,8 @@ export class ContactCreateComponent implements OnInit {
   isLoading: boolean = false;
   contactTypes: ContactType[] = []
 
-  constructor(private notificationService: NotificationsService, private contactService: ContactService, public fb: FormBuilder, private router: Router) {
+  constructor(private notificationService: NotificationsService, private contactService: ContactService,
+              public fb: FormBuilder, private router: Router, private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
@@ -60,16 +62,18 @@ export class ContactCreateComponent implements OnInit {
       .subscribe(result => {
         this.isLoading = false;
         if (result.isSuccess) {
-          this.notificationService.success('Contact added successfully');
+          this.notificationService.success(this.translateService.instant('Contact added successfully'));
           this.myForm.reset();
         } else {
           this.notificationService.error(result.exception);
         }
-
-        // this.router.navigate(['/contacts'])
       }, error => {
         this.isLoading = false;
-        this.notificationService.error(error.error.errorDescription);
+        if (error.error.errorDescription === undefined) {
+          this.notificationService.error(this.translateService.instant('Something went wrong. Please try again later'));
+        } else {
+          this.notificationService.error(error.error.errorDescription);
+        }
       })
   }
 }

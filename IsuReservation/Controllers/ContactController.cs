@@ -1,4 +1,5 @@
 using IsuReservation.Abstract;
+using IsuReservation.Helpers;
 using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
@@ -16,15 +17,20 @@ public class ContactController : ControllerBase
 {
     private readonly IContactManager _contactManager;
     private readonly ILogger<ContactController> _logger;
+    private readonly IHttpContextAccessor _accessor;
 
     /// <summary>
     /// </summary>
     /// <param name="contactManager"></param>
     /// <param name="logger"></param>
-    public ContactController(IContactManager contactManager, ILogger<ContactController> logger)
+    /// <param name="accessor"></param>
+    public ContactController(IContactManager contactManager, ILogger<ContactController> logger,
+        IHttpContextAccessor accessor)
     {
         _contactManager = contactManager;
         _logger = logger;
+        _accessor = accessor;
+        CultureHelper.SetCultureByUserLanguage(_accessor.HttpContext?.Request.Headers["App-Language"].FirstOrDefault());
     }
 
     /// <summary>
@@ -168,7 +174,7 @@ public class ContactController : ControllerBase
         [FromQuery] bool sortDesc = false, [FromQuery] int page = 1, [FromQuery] int recordsPerPage = 10)
     {
         _logger.LogInformation("Get contact list to show in table");
-
+        var a = _accessor.HttpContext;
         try
         {
             var response = await _contactManager.List(name, sortBy, sortDesc, page, recordsPerPage);

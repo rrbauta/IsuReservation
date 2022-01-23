@@ -6,37 +6,37 @@
 
       <div class="col-lg-3 col-sm-12 col-md-6">
         <label class="banner-label">
-          <b i18n>{{title}}</b>
+          <b>{{title | translate}}</b>
         </label>
       </div>
 
       <div class="col-lg-5 col-sm-12 col-md-6 hidden-text">
         <p>
-          {{subtitle}}
+          {{subtitle | translate}}
         </p>
       </div>
 
       <div *ngIf="reservation_create" class="col-lg-2 col-sm-6 col-md-6">
-        <button class="btn-rounded" i18n routerLink="/reservation-create">
-          Create Reservation
+        <button class="btn-rounded" routerLink="/reservation-create">
+          {{'Create Reservation' | translate}}
         </button>
       </div>
 
       <div *ngIf="reservation_list" class="col-lg-2 col-sm-6 col-md-6">
-        <button class="btn-rounded" i18n routerLink="/reservations">
-          Reservation List
+        <button class="btn-rounded" routerLink="/reservations">
+          {{'Reservation List' | translate}}
         </button>
       </div>
 
       <div *ngIf="contact_create" class="col-lg-2 col-sm-6 col-md-6">
-        <button class="btn-rounded" i18n routerLink="/contact-create">
-          Create Contact
+        <button class="btn-rounded" routerLink="/contact-create">
+          {{'Create Contact' | translate}}
         </button>
       </div>
 
       <div *ngIf="contact_list" class="col-lg-2 col-sm-6 col-md-6">
-        <button class="btn-rounded" i18n routerLink="/contacts">
-          Contact List
+        <button class="btn-rounded" routerLink="/contacts">
+          {{'Contact List' | translate}}
         </button>
       </div>
 
