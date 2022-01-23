@@ -6,8 +6,7 @@
   <mat-sidenav-content>
 
     <div *ngIf="dataSource.data.length>0" class="container">
-
-      <div class="mat-elevation-z1">
+      <div class="col-12 table-wrapper">
 
         <table (matSortChange)="sortData($event)" [dataSource]="dataSource" class="table"
                mat-table matSort matSortActive="created" matSortDirection="asc"
@@ -41,7 +40,7 @@
           </ng-container>
 
           <ng-container matColumnDef="actions">
-            <th *matHeaderCellDef i18n mat-header-cell></th>
+            <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
             <td *matCellDef="let row" mat-cell>
                   <span>
                      <button (click)="openDialog(row.id)" class="btn-rounded" i18n>Delete</button>
@@ -65,8 +64,6 @@
         >
         </mat-paginator>
       </div>
-
-      <br><br>
     </div>
 
   </mat-sidenav-content>

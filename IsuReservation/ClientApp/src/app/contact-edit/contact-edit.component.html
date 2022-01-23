@@ -1,52 +1,54 @@
 <app-menu-options [contact_list]="contact_list_button" [subtitle]="subtitle" [title]="title"></app-menu-options>
+<mat-sidenav-container>
+  <mat-sidenav-content>
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    <div *ngIf="!isLoading" class="container">
+      <form (submit)="submitForm()" [formGroup]="myForm">
+        <div class="row form-component-wrapper">
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <mat-form-field appearance="outline" class="fontuser">
+              <mat-label i18n>Contact Name</mat-label>
+              <input formControlName="name" matInput required>
+              <mat-icon matPrefix>people</mat-icon>
+            </mat-form-field>
+          </div>
 
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="!isLoading" class="container">
-  <form (submit)="submitForm()" [formGroup]="myForm">
-    <div class="row">
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <mat-form-field appearance="outline" class="fontuser">
-          <mat-label i18n>Contact Name</mat-label>
-          <input formControlName="name" matInput required>
-          <mat-icon matPrefix>people</mat-icon>
-        </mat-form-field>
-      </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <mat-form-field appearance="outline" class="fontuser">
+              <mat-label i18n>Contact Type</mat-label>
+              <mat-select formControlName="contactType" required>
+                <mat-option *ngFor="let ct of contactTypes" [value]="ct.id">
+                  {{ct.name}}
+                </mat-option>
+              </mat-select>
+              <mat-icon matPrefix>website</mat-icon>
+            </mat-form-field>
+          </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <mat-form-field appearance="outline" class="fontuser">
-          <mat-label i18n>Contact Type</mat-label>
-          <mat-select formControlName="contactType" required>
-            <mat-option *ngFor="let ct of contactTypes" [value]="ct.id">
-              {{ct.name}}
-            </mat-option>
-          </mat-select>
-          <mat-icon matPrefix>website</mat-icon>
-        </mat-form-field>
-      </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <mat-form-field appearance="outline" class="fontuser">
+              <mat-label i18n>Phone number</mat-label>
+              <input formControlName="phoneNumber" matInput
+                     pattern='^\d{1,3}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}$'>
+              <mat-icon matPrefix>phone</mat-icon>
+            </mat-form-field>
+          </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <mat-form-field appearance="outline" class="fontuser">
-          <mat-label i18n>Phone number</mat-label>
-          <input formControlName="phoneNumber" matInput
-                 pattern='^\d{1,3}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}[\s\.-]?\d{3,4}$'>
-          <mat-icon matPrefix>phone</mat-icon>
-        </mat-form-field>
-      </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <mat-form-field appearance="outline" class="fontuser">
+              <mat-label i18n>Birth Date</mat-label>
+              <input [matDatepicker]="picker" formControlName="birthDate" matInput required>
+              <mat-datepicker-toggle [for]="picker" matPrefix></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+        <div style="text-align: right">
+          <button [disabled]="!myForm.valid" class="btn-form" i18n type="submit">Send</button>
+        </div>
 
-      <div class="col-lg-3 col-md-3 col-sm-12">
-        <mat-form-field appearance="outline" class="fontuser">
-          <mat-label i18n>Birth Date</mat-label>
-          <input [matDatepicker]="picker" formControlName="birthDate" matInput required>
-          <mat-datepicker-toggle [for]="picker" matPrefix></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
 
-      <div style="text-align: right">
-        <button [disabled]="!myForm.valid" class="btn-form" i18n type="submit">Send</button>
-      </div>
-
+      </form>
     </div>
-
-  </form>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

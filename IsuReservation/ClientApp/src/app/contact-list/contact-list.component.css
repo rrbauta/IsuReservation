@@ -5,13 +5,25 @@
 }
 
 .table td, .table {
-  padding: .75rem;
-  border-top: 10px solid #dee2e6;
-  border-color: #f8f8f8;
+  padding: -1.25rem !important;
+  border-top: 10px solid #f8f8f8;
   font-size: 12px;
   height: border-box;
   alignment: center;
   background-color: #d6d8db;
+}
+
+th.mat-header-cell:nth-of-type(5), td.mat-cell:nth-of-type(5), td.mat-footer-cell:nth-of-type(5) {
+  width: 15%;
+}
+
+.mat-header-cell {
+  font-size: 12px;
+  font-weight: bold !important;
+}
+
+th.mat-header-cell[_ngcontent-ng-cli-universal-c156]:last-of-type, td.mat-cell[_ngcontent-ng-cli-universal-c156]:last-of-type, td.mat-footer-cell[_ngcontent-ng-cli-universal-c156]:last-of-type {
+  padding: 4px 5px 0px 30px;
 }
 
 .table td button, .table button {
