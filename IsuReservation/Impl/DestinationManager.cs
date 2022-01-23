@@ -1,3 +1,5 @@
+using System.Text;
+using System.Text.RegularExpressions;
 using IsuReservation.Abstract;
 using IsuReservation.Data;
 using IsuReservation.Helpers;
@@ -21,9 +23,19 @@ public class DestinationManager : IDestinationManager
     ///     List contact and filter by name
     /// </summary>
     /// <returns></returns>
-    public async Task<IsuResponse<List<DestinationViewModel>>> List()
+    public async Task<IsuResponse<List<DestinationViewModel>>> List(string? name)
     {
         var destinations = _dbContext.Destinations.ToList();
+
+        if (!string.IsNullOrEmpty(name))
+        {
+            var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+                .ToLower();
+
+            destinations = _dbContext.Destinations.ToList().Where(u => Regex
+                .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+                .ToLower().Contains(nameToFind)).ToList();
+        }
 
         return new IsuResponse<List<DestinationViewModel>>(
             DestinationHelper.ConvertDestinationToViewModel(destinations));

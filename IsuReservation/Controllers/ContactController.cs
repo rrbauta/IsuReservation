@@ -163,14 +163,15 @@ public class ContactController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<Paging<ContactViewModel>>> List([FromQuery] string? sortBy = "name",
+    public async Task<ActionResult<Paging<ContactViewModel>>> List([FromQuery] string? name,
+        [FromQuery] string? sortBy = "name",
         [FromQuery] bool sortDesc = false, [FromQuery] int page = 1, [FromQuery] int recordsPerPage = 10)
     {
         _logger.LogInformation("Get contact list to show in table");
 
         try
         {
-            var response = await _contactManager.List(sortBy, sortDesc, page, recordsPerPage);
+            var response = await _contactManager.List(name, sortBy, sortDesc, page, recordsPerPage);
 
             if (response.IsSuccess)
             {

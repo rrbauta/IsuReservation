@@ -23,7 +23,7 @@
             <th *matHeaderCellDef mat-header-cell></th>
             <td *matCellDef="let row" mat-cell>
               <img alt="{{row.destination.name}}" class="destination-image"
-                   src="../../assets/images/{{ row.destination.image }}">
+                   src="{{ row.destination.image }}">
             </td>
           </ng-container>
 
@@ -36,7 +36,7 @@
               </strong>
             </span>
               <div class="hidden-text">
-                <span i18n>{{ row.date }} at {{ row.time }}</span>
+                <span i18n>{{ row.displayDate }} at {{ row.time }}</span>
               </div>
             </td>
           </ng-container>
@@ -68,7 +68,7 @@
           <ng-container matColumnDef="actions">
             <th *matHeaderCellDef i18n mat-header-cell>Actions</th>
             <td *matCellDef="let row" mat-cell>
-              <button class="btn-rounded" i18n onclick="">Edit</button>
+              <button [routerLink]="['/reservation-edit', row.id]" class="btn-rounded" i18n>Edit</button>
             </td>
           </ng-container>
 

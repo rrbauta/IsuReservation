@@ -1,4 +1,3 @@
-using System.Globalization;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
 using IsuReservation.Resources;
@@ -15,12 +14,7 @@ public class ReservationUpdateRequest
     /// <summary>
     ///     Reservation date
     /// </summary>
-    public DateTime Date { get; set; }
-
-    /// <summary>
-    ///     Reservation time
-    /// </summary>
-    public TimeSpan Time { get; set; }
+    public string Date { get; set; }
 
     /// <summary>
     ///     Contact name
@@ -30,7 +24,7 @@ public class ReservationUpdateRequest
     /// <summary>
     ///     Contact phone number
     /// </summary>
-    public string ContactPhone { get; set; }
+    public string ContactPhoneNumber { get; set; }
 
     /// <summary>
     ///     Contact birthdate
@@ -54,20 +48,16 @@ public class ReservationUpdateRequest
 
     public IsuResponse<ReservationViewModel> Validate()
     {
-        if (Date != default)
-            if (!DateTime.TryParse(Date.ToString(CultureInfo.CurrentCulture), out _))
+        if (!string.IsNullOrEmpty(Date))
+            if (!DateTime.TryParse(Date, out _))
                 return new IsuResponse<ReservationViewModel>(MessageResource.InvalidDate);
-
-        if (Time != default)
-            if (TimeSpan.TryParse(Time.ToString(), out _))
-                return new IsuResponse<ReservationViewModel>(MessageResource.InvalidTime);
 
         if (ContactId != default)
         {
-            if (ContactBirthDate == default)
+            if (string.IsNullOrEmpty(ContactBirthDate))
                 return new IsuResponse<ReservationViewModel>(new ReservationViewModel());
 
-            if (!DateTime.TryParse(ContactBirthDate.ToString(CultureInfo.CurrentCulture), out _))
+            if (!DateTime.TryParse(ContactBirthDate, out _))
                 return new IsuResponse<ReservationViewModel>(MessageResource.InvalidDate);
 
             var dateTmp = Convert.ToDateTime(ContactBirthDate);

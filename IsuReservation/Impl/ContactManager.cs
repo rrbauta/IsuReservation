@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 using IsuReservation.Abstract;
@@ -52,16 +53,15 @@ public class ContactManager : IContactManager
         contact = new Contact
         {
             Name = request.Name,
-            BirthDate = DateTime.Parse(request.BirthDate),
+            BirthDate = DateTime.ParseExact(request.BirthDate, "MM/dd/yyyy", CultureInfo.CurrentCulture),
             ContactTypeId = request.ContactTypeId,
             PhoneNumber = request.PhoneNumber,
             Reservations = new List<Reservation>()
         };
-
-        var result = ContactHelper.ConvertContactToViewModel(contact, contactType);
         _dbContext.Add(contact);
         await _dbContext.SaveChangesAsync();
 
+        var result = ContactHelper.ConvertContactToViewModel(contact, contactType);
         return new IsuResponse<ContactViewModel>(result);
     }
 
@@ -91,7 +91,7 @@ public class ContactManager : IContactManager
             contact.ContactTypeId = request.ContactTypeId;
 
         if (!string.IsNullOrEmpty(request.BirthDate))
-            contact.BirthDate = DateTime.Parse(request.BirthDate);
+            contact.BirthDate = DateTime.ParseExact(request.BirthDate, "MM/dd/yyyy", CultureInfo.CurrentCulture);
 
         _dbContext.Update(contact);
         await _dbContext.SaveChangesAsync();
@@ -111,6 +111,7 @@ public class ContactManager : IContactManager
             return new IsuResponse<ContactViewModel>(MessageResource.ContactNotFound);
 
         var result = ContactHelper.ConvertContactToViewModel(contact);
+        contact.Reservations.Clear();
         _dbContext.Remove(contact);
         await _dbContext.SaveChangesAsync();
 
@@ -120,12 +121,13 @@ public class ContactManager : IContactManager
     /// <summary>
     ///     List contact
     /// </summary>
+    /// <param name="name"></param>
     /// <param name="sortBy"></param>
     /// <param name="sortDesc"></param>
     /// <param name="page"></param>
     /// <param name="recordsPerPage"></param>
     /// <returns></returns>
-    public async Task<IsuResponse<Paging<ContactViewModel>>> List(string? sortBy, bool sortDesc, int page,
+    public async Task<IsuResponse<Paging<ContactViewModel>>> List(string? name, string? sortBy, bool sortDesc, int page,
         int recordsPerPage)
     {
         var contacts = _dbContext.Contacts.ToList();
@@ -134,6 +136,16 @@ public class ContactManager : IContactManager
 
         if (page < 0)
             page = 1;
+
+        if (!string.IsNullOrEmpty(name))
+        {
+            var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+                .ToLower();
+
+            contacts = _dbContext.Contacts.ToList().Where(u => Regex
+                .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
+                .ToLower().Contains(nameToFind)).ToList();
+        }
 
         var orderList = sortBy switch
         {
@@ -211,9 +223,9 @@ public class ContactManager : IContactManager
         var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
             .ToLower();
 
-        var contact = _dbContext.Contacts.FirstOrDefault(u => Regex
+        var contact = _dbContext.Contacts.ToList().FirstOrDefault(u => Regex
             .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
-            .ToLower() == nameToFind);
+            .ToLower().Contains(nameToFind));
 
         return contact != default
             ? new IsuResponse<ContactViewModel>(ContactHelper.ConvertContactToViewModel(contact))
@@ -230,7 +242,7 @@ public class ContactManager : IContactManager
         var nameToFind = Regex.Replace(name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
             .ToLower();
 
-        var contact = _dbContext.Contacts.FirstOrDefault(u => Regex
+        var contact = _dbContext.Contacts.ToList().FirstOrDefault(u => Regex
             .Replace(u.Name.Normalize(NormalizationForm.FormD), @"[^a-zA-z0-9 ]+", "")
             .ToLower() == nameToFind);
 

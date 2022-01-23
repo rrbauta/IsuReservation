@@ -15,12 +15,7 @@ public class ReservationRequest
     /// <summary>
     ///     Reservation date
     /// </summary>
-    public DateTime Date { get; set; }
-
-    /// <summary>
-    ///     Reservation time
-    /// </summary>
-    public TimeSpan Time { get; set; }
+    public string Date { get; set; }
 
     /// <summary>
     ///     Contact name
@@ -30,7 +25,7 @@ public class ReservationRequest
     /// <summary>
     ///     Contact phone number
     /// </summary>
-    public string ContactPhone { get; set; }
+    public string ContactPhoneNumber { get; set; }
 
     /// <summary>
     ///     Contact birthdate
@@ -45,7 +40,7 @@ public class ReservationRequest
     /// <summary>
     ///     Contact identifier
     /// </summary>
-    public Guid ContactId { get; set; }
+    public string ContactId { get; set; }
 
     /// <summary>
     ///     Destination identifier
@@ -54,24 +49,18 @@ public class ReservationRequest
 
     public IsuResponse<ReservationViewModel> Validate()
     {
-        if (Date == default)
+        if (string.IsNullOrEmpty(Date))
             return new IsuResponse<ReservationViewModel>(MessageResource.DateFieldEmpty);
 
         if (!DateTime.TryParse(Date.ToString(CultureInfo.CurrentCulture), out _))
             return new IsuResponse<ReservationViewModel>(MessageResource.InvalidDate);
 
-        if (Time == default)
-            return new IsuResponse<ReservationViewModel>(MessageResource.TimeFieldEmpty);
-
-        if (TimeSpan.TryParse(Time.ToString(), out _))
-            return new IsuResponse<ReservationViewModel>(MessageResource.InvalidTime);
-
-        if (ContactId == default)
+        if (string.IsNullOrEmpty(ContactId))
         {
             if (string.IsNullOrEmpty(ContactName))
                 return new IsuResponse<ReservationViewModel>(MessageResource.NameFieldEmpty);
 
-            if (ContactBirthDate == default)
+            if (string.IsNullOrEmpty(ContactBirthDate))
                 return new IsuResponse<ReservationViewModel>(MessageResource.BirthDayFieldEmpty);
 
             if (!DateTime.TryParse(ContactBirthDate.ToString(CultureInfo.CurrentCulture), out _))
@@ -84,6 +73,11 @@ public class ReservationRequest
 
             if (ContactTypeId == default)
                 return new IsuResponse<ReservationViewModel>(MessageResource.ContactTypeFieldEmpty);
+        }
+        else
+        {
+            if (!Guid.TryParse(ContactId, out _))
+                return new IsuResponse<ReservationViewModel>(MessageResource.ContactFieldEmpty);
         }
 
         if (DestinationId == default)

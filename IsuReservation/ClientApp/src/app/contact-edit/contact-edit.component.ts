@@ -59,7 +59,7 @@ export class ContactEditComponent implements OnInit {
 
           this.myForm = this.fb.group({
             name: new FormControl(this.contact.name, Validators.required),
-            phoneNumber: new FormControl(this.contact.phoneNumber, Validators.required),
+            phoneNumber: new FormControl(this.contact.phoneNumber),
             birthDate: new FormControl(new Date(this.contact.birthDate), Validators.required),
             contactType: new FormControl(this.contact.contactTypeId, Validators.required)
           });

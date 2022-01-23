@@ -1,0 +1,13 @@
+<ejs-richtexteditor id='defaultRTE'>
+  <ng-template #valueTemplate>
+    <div style="height: 300px">
+      <mat-form-field appearance="outline" class="fontuser">
+        <mat-label i18n>Description</mat-label>
+        <input [(ngModel)]="description" hidden matInput>
+      </mat-form-field>
+    </div>
+  </ng-template>
+</ejs-richtexteditor>
+<div style="text-align: right">
+  <button (click)="onClick()" class="btn-form" i18n>Send</button>
+</div>

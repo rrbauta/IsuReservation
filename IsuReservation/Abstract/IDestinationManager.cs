@@ -10,7 +10,7 @@ public interface IDestinationManager
     ///     Destination list. Return all destinations
     /// </summary>
     /// <returns></returns>
-    public Task<IsuResponse<List<DestinationViewModel>>> List();
+    public Task<IsuResponse<List<DestinationViewModel>>> List(string? name);
 
     /// <summary>
     ///     Destination as favorite

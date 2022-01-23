@@ -46,7 +46,7 @@ public class AppDbContext : DbContext
             entity.HasOne(d => d.Contact)
                 .WithMany(p => p.Reservations)
                 .HasForeignKey(d => d.ContactId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Cascade);
         });
     }
 

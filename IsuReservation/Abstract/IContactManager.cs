@@ -32,13 +32,14 @@ public interface IContactManager
     /// <summary>
     ///     Contact list. Return all contacts
     /// </summary>
+    /// <param name="name"></param>
     /// <param name="sortBy"></param>
     /// <param name="sortDesc"></param>
     /// <param name="page"></param>
     /// <param name="recordsPerPage"></param>
     /// <returns></returns>
-    public Task<IsuResponse<Paging<ContactViewModel>>>
-        List(string? sortBy, bool sortDesc, int page, int recordsPerPage);
+    public Task<IsuResponse<Paging<ContactViewModel>>> List(string? name, string? sortBy, bool sortDesc, int page,
+        int recordsPerPage);
 
     /// <summary>
     ///     Get Contact

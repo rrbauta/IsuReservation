@@ -18,7 +18,8 @@ public class ReservationHelper
         var reservationToViewModel = new ReservationViewModel
         {
             Id = reservation.Id,
-            Date = reservation.Date.ToString("dddd MMMM dd"),
+            DisplayDate = reservation.Date.ToString("dddd MMMM dd"),
+            Date = $"{reservation.Date:MM/dd/yyyy} {reservation.Time.ToString()}",
             Time = displayTime,
             Description = reservation.Description,
             Contact = ContactHelper.ConvertContactToViewModel(reservation.Contact),

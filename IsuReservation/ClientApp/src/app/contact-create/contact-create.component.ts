@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ContactService} from "../services/contact.service";
 import {ContactType} from "../models/contact-type.model";
 import {Router} from "@angular/router";
@@ -33,10 +33,10 @@ export class ContactCreateComponent implements OnInit {
 
   ngOnInit(): void {
     this.myForm = this.fb.group({
-      name: [''],
-      phoneNumber: [''],
-      birthDate: [''],
-      contactType: ['']
+      name: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      contactType: ['', Validators.required]
     });
 
     this.getContactTypes();

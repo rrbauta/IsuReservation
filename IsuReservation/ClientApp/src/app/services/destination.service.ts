@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
-import {DestinationModel} from "../models/reservation.paging.model";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
+import {DestinationModel, DestinationSingleListModel} from "../models/destination.model";
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +19,11 @@ export class DestinationService {
 
   ranking(destinationId: string, ranking: number): Observable<DestinationModel> {
     return this.httpClient.put<DestinationModel>(this.baseUrl + `api/destinations/ranking/${destinationId}`, {ranking: ranking});
+  }
+
+  getDestinations(name: string): Observable<DestinationSingleListModel> {
+    return this.httpClient.get<DestinationSingleListModel>(
+      this.baseUrl + `api/destinations?name=${name}`
+    );
   }
 }

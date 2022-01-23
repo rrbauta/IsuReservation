@@ -15,6 +15,11 @@ public class ReservationViewModel
     /// <summary>
     ///     Reservation date
     /// </summary>
+    public string DisplayDate { get; set; }
+
+    /// <summary>
+    ///     Reservation date
+    /// </summary>
     public string Date { get; set; }
 
     /// <summary>

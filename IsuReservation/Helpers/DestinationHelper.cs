@@ -10,19 +10,19 @@ public class DestinationHelper
     /// </summary>
     /// <param name="destination"></param>
     /// <returns></returns>
-    public static DestinationViewModel ConvertDestinationToViewModel(Destination destination)
+    public static DestinationViewModel ConvertDestinationToViewModel(Destination? destination)
     {
-        var destinationViewModel = new DestinationViewModel
-        {
-            Id = destination.Id,
-            Description = destination.Description,
-            Favorite = destination.Favorite,
-            Image = destination.Image,
-            Name = destination.Name,
-            Rating = destination.Rating
-        };
-
-        return destinationViewModel;
+        return destination != default
+            ? new DestinationViewModel
+            {
+                Id = destination.Id,
+                Description = destination.Description,
+                Favorite = destination.Favorite,
+                Image = destination.Image,
+                Name = destination.Name,
+                Rating = destination.Rating
+            }
+            : new DestinationViewModel();
     }
 
     /// <summary>

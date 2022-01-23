@@ -17,9 +17,9 @@ export class ContactService {
     this.baseUrl = baseUrl;
   }
 
-  getContacts(page: number = 1, recordsPerPage: number = 10, sortBy: string, sortDesc: boolean): Observable<ContactPagingModel> {
+  getContacts(page: number = 1, recordsPerPage: number = 10, sortBy: string, sortDesc: boolean, name: string = ''): Observable<ContactPagingModel> {
     return this.httpClient.get<ContactPagingModel>(
-      this.baseUrl + `api/contacts?page=${page}&recordsPerPage=${recordsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}`
+      this.baseUrl + `api/contacts?page=${page}&recordsPerPage=${recordsPerPage}&sortBy=${sortBy}&sortDesc=${sortDesc}&name=${name}`
     );
   }
 

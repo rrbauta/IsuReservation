@@ -6,6 +6,16 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import url('//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
+/*@import '../node_modules/@syncfusion/ej2-base/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-icons/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';*/
+/*@import '../node_modules/@syncfusion/ej2-richtexteditor/styles/material.css';*/
+
 form {
   margin: 35px auto 100px;
   display: block;
@@ -93,7 +103,7 @@ html {
 
 .banner-label {
   color: #bf1110;
-  font-size: 20px;
+  font-size: 16px;
   vertical-align: middle !important;
 }
 
@@ -164,6 +174,10 @@ mat-icon {
   font-size: medium;
 }
 
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  background-color: white !important;
+}
+
 /*----------Messages-----------------*/
 .mat-simple-snack-bar-content {
   padding-left: 5px;
@@ -231,4 +245,9 @@ mat-icon {
 .my-notify-error {
   color: #D8000C;
   background-color: #FFD2D2;
+}
+
+
+.mat-datepicker-content .time-container {
+  height: 150px !important;
 }

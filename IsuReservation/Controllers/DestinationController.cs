@@ -34,13 +34,13 @@ public class DestinationController : ControllerBase
     [HttpGet]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<Paging<ContactViewModel>>> List()
+    public async Task<ActionResult<Paging<ContactViewModel>>> List([FromQuery] string? name)
     {
         _logger.LogInformation("Destinations list to show in reservation form");
 
         try
         {
-            var response = await _destinationManager.List();
+            var response = await _destinationManager.List(name);
 
             if (response.IsSuccess)
             {

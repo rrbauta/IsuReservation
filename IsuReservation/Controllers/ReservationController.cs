@@ -45,7 +45,7 @@ public class ReservationController : ControllerBase
     [HttpPost]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Create([FromForm] ReservationRequest requestModel)
+    public async Task<IActionResult> Create([FromBody] ReservationRequest requestModel)
     {
         _logger.LogInformation("Create reservation using data: {Request}", JsonConvert.SerializeObject(requestModel));
 
@@ -92,7 +92,7 @@ public class ReservationController : ControllerBase
     [Route("{reservationId:guid}")]
     [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<IActionResult> Update([FromForm] ReservationUpdateRequest requestModel,
+    public async Task<IActionResult> Update([FromBody] ReservationUpdateRequest requestModel,
         [FromRoute] Guid reservationId)
     {
         _logger.LogInformation("Update reservation using data: {Request}", JsonConvert.SerializeObject(requestModel));
@@ -154,6 +154,44 @@ public class ReservationController : ControllerBase
             _logger.LogError(
                 "Get reservation list to show in table failed. Caught exception: {Error}",
                 JsonConvert.SerializeObject(e));
+
+            return BadRequest(new IsuErrorResponse(MessageResource.UnhandledError));
+        }
+    }
+
+    /// <summary>
+    ///     Get Reservation by identifier
+    /// </summary>
+    /// <returns>Return a Reservation.</returns>
+    [HttpGet]
+    [Route("{reservationId:guid}")]
+    [ProducesResponseType(typeof(IsuErrorResponse), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult<Paging<ContactViewModel>>> GetReservationById([FromRoute] Guid reservationId)
+    {
+        _logger.LogInformation("Get Reservation to show in table");
+
+        try
+        {
+            var response = await _reservationManager.GetReservationById(reservationId);
+
+            if (response.IsSuccess)
+            {
+                _logger.LogInformation(
+                    "Get Reservation finish: {Response}", JsonConvert.SerializeObject(response));
+
+                return Ok(response);
+            }
+
+            _logger.LogError("Get Reservation failed: {Response}",
+                JsonConvert.SerializeObject(response));
+
+            return BadRequest(new IsuErrorResponse(response.Exception.Message));
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(
+                "Get Reservation. Caught exception: {Error}", JsonConvert.SerializeObject(e));
 
             return BadRequest(new IsuErrorResponse(MessageResource.UnhandledError));
         }

@@ -1,3 +1,4 @@
+using System.Globalization;
 using IsuReservation.Abstract;
 using IsuReservation.Data;
 using IsuReservation.Helpers;
@@ -35,8 +36,8 @@ public class ReservationManager : IReservationManager
         if (!response.IsSuccess)
             return response;
 
-        var contact = request.ContactId != default
-            ? _contactManager.FindContact(request.ContactId)
+        var contact = !string.IsNullOrEmpty(request.ContactId)
+            ? _contactManager.FindContact(Guid.Parse(request.ContactId))
             : _contactManager.FindContactByName(request.ContactName);
 
         if (contact == default)
@@ -45,7 +46,7 @@ public class ReservationManager : IReservationManager
             {
                 Name = request.ContactName,
                 BirthDate = request.ContactBirthDate,
-                PhoneNumber = request.ContactPhone,
+                PhoneNumber = request.ContactPhoneNumber,
                 ContactTypeId = request.ContactTypeId
             });
 
@@ -56,9 +57,22 @@ public class ReservationManager : IReservationManager
             if (contact == default)
                 return new IsuResponse<ReservationViewModel>(MessageResource.ContactNotFound);
         }
+        else
+        {
+            await _contactManager.Update(new ContactUpdateRequest
+            {
+                Name = request.ContactName,
+                BirthDate = request.ContactBirthDate,
+                PhoneNumber = request.ContactPhoneNumber,
+                ContactTypeId = request.ContactTypeId
+            }, contact.Id);
+        }
+
+        var date = DateTime.Parse(request.Date);
+        var time = TimeSpan.Parse(date.ToString("hh:mm:ss"));
 
         var reservation = _dbContext.Reservations.FirstOrDefault(r =>
-            r.Date == request.Date && r.Time == request.Time && r.DestinationId == request.DestinationId &&
+            r.Date == date && r.Time == time && r.DestinationId == request.DestinationId &&
             r.ContactId == contact.Id);
 
         if (reservation != default)
@@ -66,8 +80,8 @@ public class ReservationManager : IReservationManager
 
         var myReservation = new Reservation
         {
-            Date = request.Date,
-            Time = request.Time,
+            Date = DateTime.ParseExact(date.ToString("MM/dd/yyyy"), "MM/dd/yyyy", CultureInfo.CurrentCulture),
+            Time = time,
             Description = request.Description,
             DestinationId = request.DestinationId
         };
@@ -105,7 +119,7 @@ public class ReservationManager : IReservationManager
             {
                 Name = request.ContactName,
                 BirthDate = request.ContactBirthDate,
-                PhoneNumber = request.ContactPhone,
+                PhoneNumber = request.ContactPhoneNumber,
                 ContactTypeId = request.ContactTypeId
             });
 
@@ -117,12 +131,26 @@ public class ReservationManager : IReservationManager
             if (contact == default)
                 return new IsuResponse<ReservationViewModel>(MessageResource.ContactNotFound);
         }
+        else
+        {
+            await _contactManager.Update(new ContactUpdateRequest
+            {
+                Name = request.ContactName,
+                BirthDate = request.ContactBirthDate,
+                PhoneNumber = request.ContactPhoneNumber,
+                ContactTypeId = request.ContactTypeId
+            }, contact.Id);
+        }
 
-        if (request.Date != default)
-            reservation.Date = request.Date;
+        if (!string.IsNullOrEmpty(request.Date))
+        {
+            var date = DateTime.Parse(request.Date);
+            var time = TimeSpan.Parse(date.ToString("hh:mm:ss"));
 
-        if (request.Time != default)
-            reservation.Time = request.Time;
+            reservation.Date =
+                DateTime.ParseExact(date.ToString("MM/dd/yyyy"), "MM/dd/yyyy", CultureInfo.CurrentCulture);
+            reservation.Time = time;
+        }
 
         if (!string.IsNullOrEmpty(request.Description))
             reservation.Description = request.Description;
@@ -202,5 +230,22 @@ public class ReservationManager : IReservationManager
         };
 
         return new IsuResponse<Paging<ReservationViewModel>>(response);
+    }
+
+    /// <summary>
+    ///     Get contact by identifier
+    /// </summary>
+    /// <param name="reservationId"></param>
+    /// <returns></returns>
+    public async Task<IsuResponse<ReservationViewModel>> GetReservationById(Guid reservationId)
+    {
+        if (reservationId == default)
+            return new IsuResponse<ReservationViewModel>(MessageResource.ReservationNotFound);
+
+        var reservation = _dbContext.Reservations.FirstOrDefault(u => u.Id == reservationId);
+        if (reservation == default)
+            return new IsuResponse<ReservationViewModel>(MessageResource.ContactNotFound);
+
+        return new IsuResponse<ReservationViewModel>(ReservationHelper.ConvertReservationToViewModel(reservation));
     }
 }

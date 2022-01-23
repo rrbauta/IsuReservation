@@ -14,9 +14,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {StarRatingComponent} from "./star-rating/star-rating.component";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSelectModule} from "@angular/material/select";
+import {MatSelect, MatSelectModule} from "@angular/material/select";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {ContactListComponent} from "./contact-list/contact-list.component";
 import {MatSortModule} from "@angular/material/sort";
@@ -37,6 +36,15 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {ContactEditComponent} from "./contact-edit/contact-edit.component";
 import {MenuOptionsComponent} from "./custom-components/menu-options/menu-options.component";
 import {HeaderComponent} from "./custom-components/header/header.component";
+import {ReservationCreateComponent} from "./reservation-create/reservation-create.component";
+import {ReservationEditComponent} from "./reservation-edit/reservation-edit.component";
+import {RichTextEditorAllModule} from "@syncfusion/ej2-angular-richtexteditor";
+import {RichTextEditorComponent} from "./custom-components/rich-text-editor/rich-text-editor.component";
+import {CKEditorModule} from "ng2-ckeditor";
+import {NgxMatSelectSearchModule} from "ngx-mat-select-search";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {StarRatingComponent} from "./custom-components/star-rating/star-rating.component";
+import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from "@angular-material-components/datetime-picker";
 
 @NgModule({
   entryComponents: [ContactCreateComponent],
@@ -45,15 +53,19 @@ import {HeaderComponent} from "./custom-components/header/header.component";
     HomeComponent,
     HeaderComponent,
     ReservationListComponent,
+    ReservationCreateComponent,
+    ReservationEditComponent,
     StarRatingComponent,
     ContactListComponent,
     ContactCreateComponent,
     ContactEditComponent,
     MenuOptionsComponent,
     MyTelInput,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    RichTextEditorComponent
   ],
   imports: [
+    CKEditorModule,
     BrowserModule.withServerTransition({appId: 'ng-cli-universal'}),
     HttpClientModule,
     FormsModule,
@@ -61,6 +73,8 @@ import {HeaderComponent} from "./custom-components/header/header.component";
     RouterModule.forRoot([
       {path: '', component: HomeComponent, pathMatch: 'full'},
       {path: 'reservations', component: ReservationListComponent},
+      {path: 'reservation-create', component: ReservationCreateComponent},
+      {path: 'reservation-edit/:id', component: ReservationEditComponent},
       {path: 'contacts', component: ContactListComponent},
       {path: 'contact-create', component: ContactCreateComponent},
       {path: 'contact-edit/:id', component: ContactEditComponent},
@@ -86,9 +100,14 @@ import {HeaderComponent} from "./custom-components/header/header.component";
     MatChipsModule,
     MatDividerModule,
     MatButtonToggleModule,
-    MatDialogModule
+    MatDialogModule,
+    RichTextEditorAllModule,
+    NgxMatSelectSearchModule,
+    MatAutocompleteModule,
+    NgxMatDatetimePickerModule,
+    NgxMatNativeDateModule,
   ],
-  providers: [MatSnackBar],
+  providers: [MatSnackBar, MatSelect],
   bootstrap: [AppComponent]
 })
 export class AppModule {

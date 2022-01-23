@@ -31,4 +31,11 @@ public interface IReservationManager
     /// <returns></returns>
     public Task<IsuResponse<Paging<ReservationViewModel>>> List(string? sortBy, bool sortDesc, int page,
         int recordsPerPage);
+
+    /// <summary>
+    ///     Get reservation
+    /// </summary>
+    /// <param name="reservationId"></param>
+    /// <returns></returns>
+    public Task<IsuResponse<ReservationViewModel>> GetReservationById(Guid reservationId);
 }
