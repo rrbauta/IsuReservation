@@ -38,7 +38,7 @@
                 {{ row.destination.name }}
               </strong>
             </span>
-                <div class="hidden-text">
+                <div class="hidden-date">
                   <span>{{ row.displayDate }} at {{ row.time }}</span>
                 </div>
               </td>
@@ -46,7 +46,7 @@
 
             <ng-container matColumnDef="rating">
               <th *matHeaderCellDef mat-header-cell>Rating</th>
-              <td *matCellDef="let row" mat-cell>
+              <td *matCellDef="let row" class="hidden-rating" mat-cell>
                 <div>{{'Ranking' | translate}}</div>
                 <mat-star-rating (ratingUpdated)="onRatingChanged($event)" [id]="row.id"
                                  [rating]="row.destination.rating"
@@ -58,7 +58,7 @@
               <th *matHeaderCellDef mat-header-cell>Favorite</th>
               <td *matCellDef="let row" mat-cell>
                 <span (click)="setFavorite(row.destination.id, row.id)"
-                      style="cursor: pointer">{{'Add Favorites' | translate}}</span>
+                      class="hidden-favorites" style="cursor: pointer">{{'Add Favorites' | translate}}</span>
 
                 <img (click)="setFavorite(row.destination.id, row.id)" *ngIf="row.destination.favorite"
                      alt="" class="favorite-image"

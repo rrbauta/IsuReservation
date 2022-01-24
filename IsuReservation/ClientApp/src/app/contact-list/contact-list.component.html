@@ -26,8 +26,9 @@
           </ng-container>
 
           <ng-container matColumnDef="birthDate">
-            <th *matHeaderCellDef mat-header-cell mat-sort-header="birthDate">{{'BirthDate' | translate}}</th>
-            <td *matCellDef="let row" mat-cell>
+            <th *matHeaderCellDef class="hidden-birthdate" mat-header-cell
+                mat-sort-header="birthDate">{{'BirthDate' | translate}}</th>
+            <td *matCellDef="let row" class="hidden-birthdate" mat-cell>
               {{row.birthDate}}
             </td>
           </ng-container>
@@ -45,8 +46,8 @@
                   <span class="btn-actions">
                      <button (click)="openDialog(row.id)" class="btn-rounded">{{'Delete' | translate}}</button>
                   </span>
-              <button [routerLink]="['/contact-edit', row.id]" class="btn-rounded"
-                      style="margin-right: 5px">{{'Edit' | translate}}
+              <button [routerLink]="['/contact-edit', row.id]"
+                      class="btn-rounded btn-actions-edit">{{'Edit' | translate}}
               </button>
             </td>
           </ng-container>

@@ -1,3 +1,8 @@
+<div class="col-lg-2 col-sm-6 col-md-6 header-link">
+  <button class="header-link" routerLink="/reservation-create">
+    {{'Create Reservation' | translate}}
+  </button>
+</div>
 <nav
   class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
 >
@@ -5,36 +10,34 @@
     <div class="row">
 
       <div class="col-lg-3 col-sm-12 col-md-6">
-        <label class="banner-label">
-          <b>{{title | translate}}</b>
-        </label>
+        <label class="banner-label">{{title | translate}} </label>
       </div>
 
-      <div class="col-lg-5 col-sm-12 col-md-6 hidden-text">
+      <div class="col-lg-5 col-sm-12 col-md-6">
         <p>
           {{subtitle | translate}}
         </p>
       </div>
 
-      <div *ngIf="reservation_create" class="col-lg-2 col-sm-6 col-md-6">
+      <div *ngIf="reservation_create" class="col-lg-2 col-sm-6 col-md-6 hidden-btn">
         <button class="btn-rounded" routerLink="/reservation-create">
           {{'Create Reservation' | translate}}
         </button>
       </div>
 
-      <div *ngIf="reservation_list" class="col-lg-2 col-sm-6 col-md-6">
+      <div *ngIf="reservation_list" class="col-lg-2 col-sm-6 col-md-6 hidden-btn">
         <button class="btn-rounded" routerLink="/reservations">
           {{'Reservation List' | translate}}
         </button>
       </div>
 
-      <div *ngIf="contact_create" class="col-lg-2 col-sm-6 col-md-6">
+      <div *ngIf="contact_create" class="col-lg-2 col-sm-6 col-md-6 hidden-btn">
         <button class="btn-rounded" routerLink="/contact-create">
           {{'Create Contact' | translate}}
         </button>
       </div>
 
-      <div *ngIf="contact_list" class="col-lg-2 col-sm-6 col-md-6">
+      <div *ngIf="contact_list" class="col-lg-2 col-sm-6 col-md-6 hidden-btn">
         <button class="btn-rounded" routerLink="/contacts">
           {{'Contact List' | translate}}
         </button>

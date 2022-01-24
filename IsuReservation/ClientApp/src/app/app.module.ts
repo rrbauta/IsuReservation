@@ -47,6 +47,7 @@ import {StarRatingComponent} from "./custom-components/star-rating/star-rating.c
 import {NgxMatDatetimePickerModule, NgxMatNativeDateModule} from "@angular-material-components/datetime-picker";
 import {TranslateLoader, TranslateModule} from "@ngx-translate/core";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
+import {AppRoutingModule} from "./app-routing/app-routing.module";
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -121,6 +122,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatAutocompleteModule,
     NgxMatDatetimePickerModule,
     NgxMatNativeDateModule,
+    AppRoutingModule
   ],
   providers: [MatSnackBar,
     MatSelect

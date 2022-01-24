@@ -40,3 +40,99 @@ th.mat-header-cell[_ngcontent-ng-cli-universal-c156]:last-of-type, td.mat-cell[_
   float: left;
   margin-left: -30px;
 }
+
+.btn-actions-edit {
+  margin-right: 5px
+}
+
+@media (max-width: 990px) {
+
+  .btn-actions {
+    float: right;
+  }
+
+  .btn-actions-edit {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1199px) {
+  .col-lg-12 {
+    flex: 0 0 auto;
+    width: 100%;
+    margin: 5px 0 0 -5px;
+  }
+
+
+  .btn-actions {
+    float: right;
+  }
+
+  .btn-actions-edit {
+    float: right;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 767px) {
+
+  th.mat-header-cell[_ngcontent-ng-cli-universal-c144]:first-of-type, td.mat-cell[_ngcontent-ng-cli-universal-c144]:first-of-type, td.mat-footer-cell[_ngcontent-ng-cli-universal-c144]:first-of-type {
+    width: 1%;
+  }
+
+  th.mat-header-cell[_ngcontent-ng-cli-universal-c144]:nth-of-type(2), td.mat-cell[_ngcontent-ng-cli-universal-c144]:nth-of-type(2), td.mat-footer-cell[_ngcontent-ng-cli-universal-c144]:nth-of-type(2) {
+    width: 45%;
+  }
+
+  .mat-paginator {
+    display: none !important;
+  }
+
+  .container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 100%;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .table-wrapper {
+    padding: 0px;
+    background-color: white;
+    margin: 0px;
+  }
+
+  .table[_ngcontent-ng-cli-universal-c144] td[_ngcontent-ng-cli-universal-c144], .table[_ngcontent-ng-cli-universal-c144] th[_ngcontent-ng-cli-universal-c144] {
+    border-top: 7px solid white;
+  }
+
+  th.mat-header-cell:nth-of-type(4), td.mat-cell:nth-of-type(4), td.mat-footer-cell:nth-of-type(4) {
+    width: 10%;
+  }
+
+  th.mat-header-cell:nth-of-type(5), td.mat-cell:nth-of-type(5), td.mat-footer-cell:nth-of-type(5) {
+    width: 10%;
+  }
+
+  tr:nth-child(even) td {
+    background: #ebebeb;
+  }
+
+  tr:nth-child(odd) td {
+    background: #f7f7f7;
+  }
+
+  tr.mat-row, tr.mat-footer-row {
+    height: 70px;
+  }
+
+  .btn-actions {
+    float: right;
+  }
+
+  .btn-actions-edit {
+    float: right;
+    margin-right: 0;
+  }
+}

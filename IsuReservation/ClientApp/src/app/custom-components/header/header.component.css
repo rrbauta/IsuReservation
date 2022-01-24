@@ -10,3 +10,30 @@
   width: 35px;
   height: 35px
 }
+
+.language {
+  float: right;
+  padding: 50px 18%
+}
+
+@media (max-width: 737px) {
+  .back-header[_ngcontent-ng-cli-universal-c61] {
+    background-image: url(../../../assets/images/banner1.jpg);
+    width: 100%;
+    height: 80px;
+    background-repeat: round;
+  }
+}
+
+@media (max-width: 767px) {
+  .language-header {
+    cursor: pointer;
+    width: 25px;
+    height: 25px
+  }
+
+  .language {
+    float: right;
+    padding: 0 4%
+  }
+}
