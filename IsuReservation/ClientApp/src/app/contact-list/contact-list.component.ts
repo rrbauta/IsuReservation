@@ -61,11 +61,13 @@ export class ContactListComponent implements OnInit {
       .subscribe(result => {
         this.dataSource.data = result.data.outcome;
 
-        setTimeout(() => {
-          this.paginator.pageIndex = this.currentPage;
-          this.paginator.length = result.data.totalRecords;
-          this.totalRecords = result.data.totalRecords;
-        });
+        if (result.data.totalRecords > 0) {
+          setTimeout(() => {
+            this.paginator.pageIndex = this.currentPage;
+            this.paginator.length = result.data.totalRecords;
+            this.totalRecords = result.data.totalRecords;
+          });
+        }
         this.isLoading = false;
       }, error => {
         console.log(error);

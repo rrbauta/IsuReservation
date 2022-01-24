@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace IsuReservation.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220119032624_InitialCreate")]
+    [Migration("20220124121014_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ namespace IsuReservation.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IsuReservation.Models.Contact", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Contact", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -60,7 +60,7 @@ namespace IsuReservation.Migrations
                     b.ToTable("Contacts");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.ContactType", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.ContactType", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -82,9 +82,35 @@ namespace IsuReservation.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ContactTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("64cb848f-43d6-47a6-a05d-2141a2aabdd4"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2186),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2188),
+                            IsDeleted = false,
+                            Name = "Contact Type 1"
+                        },
+                        new
+                        {
+                            Id = new Guid("5aa58205-0b51-4ec8-9822-8e61c728817c"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2214),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2215),
+                            IsDeleted = false,
+                            Name = "Contact Type 2"
+                        },
+                        new
+                        {
+                            Id = new Guid("2e5c86eb-ec54-44ad-bac5-e6928203cf85"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2240),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2241),
+                            IsDeleted = false,
+                            Name = "Contact Type 3"
+                        });
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Destination", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Destination", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -120,9 +146,47 @@ namespace IsuReservation.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Destinations");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("5e1d7f3d-210c-44e3-8854-a642d956aa55"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(1911),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(1937),
+                            Description = "Description for Destination 1",
+                            Favorite = false,
+                            Image = "https://as01.epimg.net/diarioas/imagenes/2021/03/08/actualidad/1615216406_061390_1615221159_sumario_normal.jpg",
+                            IsDeleted = false,
+                            Name = "Destination 1",
+                            Rating = 5
+                        },
+                        new
+                        {
+                            Id = new Guid("f0d0aa79-399a-4283-bd2f-acbf3eb537dc"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2013),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2014),
+                            Description = "Description for Destination 2",
+                            Favorite = false,
+                            Image = "https://viajes.nationalgeographic.com.es/medio/2019/04/30/istock-840449198_07c3ef3b_1245x842.jpg",
+                            IsDeleted = false,
+                            Name = "Destination 2",
+                            Rating = 1
+                        },
+                        new
+                        {
+                            Id = new Guid("cbe11d8e-424e-4776-a536-2e7f5e290041"),
+                            DateCreated = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2040),
+                            DateModified = new DateTime(2022, 1, 24, 7, 10, 14, 696, DateTimeKind.Local).AddTicks(2041),
+                            Description = "Description for Destination 3",
+                            Favorite = false,
+                            Image = "https://viajes.nationalgeographic.com.es/medio/2019/04/30/istock-840449198_07c3ef3b_1245x842.jpg",
+                            IsDeleted = false,
+                            Name = "Destination 3",
+                            Rating = 1
+                        });
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Reservation", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Reservation", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,9 +226,9 @@ namespace IsuReservation.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Contact", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Contact", b =>
                 {
-                    b.HasOne("IsuReservation.Models.ContactType", "ContactType")
+                    b.HasOne("IsuReservation.Models.Entities.ContactType", "ContactType")
                         .WithMany("Contacts")
                         .HasForeignKey("ContactTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -173,15 +237,15 @@ namespace IsuReservation.Migrations
                     b.Navigation("ContactType");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Reservation", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Reservation", b =>
                 {
-                    b.HasOne("IsuReservation.Models.Contact", "Contact")
+                    b.HasOne("IsuReservation.Models.Entities.Contact", "Contact")
                         .WithMany("Reservations")
                         .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("IsuReservation.Models.Destination", "Destination")
+                    b.HasOne("IsuReservation.Models.Entities.Destination", "Destination")
                         .WithMany("Reservations")
                         .HasForeignKey("DestinationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -192,17 +256,17 @@ namespace IsuReservation.Migrations
                     b.Navigation("Destination");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Contact", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Contact", b =>
                 {
                     b.Navigation("Reservations");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.ContactType", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.ContactType", b =>
                 {
                     b.Navigation("Contacts");
                 });
 
-            modelBuilder.Entity("IsuReservation.Models.Destination", b =>
+            modelBuilder.Entity("IsuReservation.Models.Entities.Destination", b =>
                 {
                     b.Navigation("Reservations");
                 });

@@ -65,12 +65,13 @@ export class ReservationListComponent {
     this.reservationService.getReservations(this.currentPage + 1, this.pageSize, this.sortBy, this.sortDesc)
       .subscribe(result => {
         this.dataSource.data = result.data.outcome;
-
-        setTimeout(() => {
-          this.paginator.pageIndex = this.currentPage;
-          this.paginator.length = result.data.totalRecords;
-          this.totalRecords = result.data.totalRecords;
-        });
+        if (result.data.totalRecords > 0) {
+          setTimeout(() => {
+            this.paginator.pageIndex = this.currentPage;
+            this.paginator.length = result.data.totalRecords;
+            this.totalRecords = result.data.totalRecords;
+          });
+        }
         this.isLoading = false;
       }, error => {
         console.log(error);

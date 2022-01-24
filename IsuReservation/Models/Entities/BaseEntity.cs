@@ -32,7 +32,7 @@ public abstract class BaseEntity
     /// <summary>
     ///     Entity deleted. This field will be used to implement a soft delete
     /// </summary>
-    public bool IsDeleted { get; set; }
+    public bool IsDeleted { get; set; } = false;
 
     /// <summary>
     ///     Serialize the object as a json data, null fields will be not rendered.

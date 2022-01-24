@@ -63,7 +63,7 @@ export class ContactCreateComponent implements OnInit {
         this.isLoading = false;
         if (result.isSuccess) {
           this.notificationService.success(this.translateService.instant('Contact added successfully'));
-          this.myForm.reset();
+          this.router.navigate(['/contacts'])
         } else {
           this.notificationService.error(result.exception);
         }

@@ -43,6 +43,7 @@
         <Folder Include="ClientApp\src\app\custom-components"/>
         <Folder Include="ClientApp\src\assets\images"/>
         <Folder Include="Meta"/>
+        <Folder Include="Migrations"/>
     </ItemGroup>
 
     <ItemGroup>

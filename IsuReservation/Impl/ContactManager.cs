@@ -9,6 +9,7 @@ using IsuReservation.Models.Request;
 using IsuReservation.Models.Response;
 using IsuReservation.Models.ViewModel;
 using IsuReservation.Resources;
+using Microsoft.EntityFrameworkCore;
 
 namespace IsuReservation.Impl;
 
@@ -50,19 +51,32 @@ public class ContactManager : IContactManager
         if (contactType == default)
             return new IsuResponse<ContactViewModel>(MessageResource.ContactTypeNotFound);
 
-        contact = new Contact
-        {
-            Name = request.Name,
-            BirthDate = DateTime.ParseExact(request.BirthDate, "MM/dd/yyyy", CultureInfo.CurrentCulture),
-            ContactTypeId = request.ContactTypeId,
-            PhoneNumber = request.PhoneNumber,
-            Reservations = new List<Reservation>()
-        };
-        _dbContext.Add(contact);
-        await _dbContext.SaveChangesAsync();
+        // var param = new SqlParameter("@Name", name);
+        // var contact = _dbContext.Contacts
+        //     .FromSqlRaw("dbo.GetContactsFilteredByName @Name", param)
+        //     .ToList();
 
-        var result = ContactHelper.ConvertContactToViewModel(contact, contactType);
-        return new IsuResponse<ContactViewModel>(result);
+        await _dbContext.Database.ExecuteSqlRawAsync("CreateContact @p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7",
+            new object[]
+            {
+                Guid.NewGuid(), request.Name, request.PhoneNumber, request.BirthDate, request.ContactTypeId, false,
+                DateTime.Now, DateTime.Now
+            });
+
+
+        // contact = new Contact
+        // {
+        //     Name = request.Name,
+        //     BirthDate = DateTime.ParseExact(request.BirthDate, "MM/dd/yyyy", CultureInfo.CurrentCulture),
+        //     ContactTypeId = request.ContactTypeId,
+        //     PhoneNumber = request.PhoneNumber,
+        //     Reservations = new List<Reservation>()
+        // };
+        // _dbContext.Add(contact);
+        // await _dbContext.SaveChangesAsync();
+        //
+        // var result = ContactHelper.ConvertContactToViewModel(contact, contactType);
+        return new IsuResponse<ContactViewModel>(new ContactViewModel());
     }
 
     /// <summary>

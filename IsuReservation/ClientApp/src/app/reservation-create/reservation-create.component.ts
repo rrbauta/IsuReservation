@@ -170,7 +170,7 @@ export class ReservationCreateComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         if (result.isSuccess) {
           this.notificationService.success(this.translateService.instant('Reservation added successfully'));
-          this.myForm.reset();
+          this.router.navigate(['/reservations'])
           this.description = '';
         } else {
           this.notificationService.error(result.exception);
