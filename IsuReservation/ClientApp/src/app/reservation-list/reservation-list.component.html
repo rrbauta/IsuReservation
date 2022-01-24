@@ -24,7 +24,7 @@
           <table [dataSource]="dataSource" class="table" mat-table>
             <ng-container matColumnDef="image">
               <th *matHeaderCellDef mat-header-cell></th>
-              <td *matCellDef="let row" mat-cell>
+              <td *matCellDef="let row" class="hidden-destination-image" mat-cell>
                 <img alt="{{row.destination.name}}" class="destination-image"
                      src="{{ row.destination.image }}">
               </td>

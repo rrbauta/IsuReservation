@@ -43,12 +43,12 @@
           <ng-container matColumnDef="actions">
             <th *matHeaderCellDef mat-header-cell>{{'Actions' | translate}}</th>
             <td *matCellDef="let row" mat-cell>
-                  <span class="btn-actions">
-                     <button (click)="openDialog(row.id)" class="btn-rounded">{{'Delete' | translate}}</button>
-                  </span>
-              <button [routerLink]="['/contact-edit', row.id]"
-                      class="btn-rounded btn-actions-edit">{{'Edit' | translate}}
-              </button>
+              <div class="row btn-actions">
+                <button (click)="openDialog(row.id)" class="btn-rounded">{{'Delete' | translate}}</button>
+                <button [routerLink]="['/contact-edit', row.id]"
+                        class="btn-rounded">{{'Edit' | translate}}
+                </button>
+              </div>
             </td>
           </ng-container>
 

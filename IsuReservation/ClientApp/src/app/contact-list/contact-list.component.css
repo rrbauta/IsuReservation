@@ -66,7 +66,7 @@ th.mat-header-cell[_ngcontent-ng-cli-universal-c156]:last-of-type, td.mat-cell[_
 
 
   .btn-actions {
-    float: right;
+    /*float: right;*/
   }
 
   .btn-actions-edit {

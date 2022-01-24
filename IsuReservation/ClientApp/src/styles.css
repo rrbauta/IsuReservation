@@ -400,7 +400,7 @@ field-prefix .mat-icon-button .mat-datepicker-toggle-default-icon, .mat-form-fie
 }
 
 @media (max-width: 767px) {
-  .hidden-favorites, .hidden-text, .hidden-rating, .destination-image, .hidden-btn, .mat-paginatorinator, .hidden-birthdate {
+  .hidden-favorites, .hidden-text, .hidden-destination-image, .hidden-rating, .destination-image, .hidden-btn, .mat-paginatorinator, .hidden-birthdate {
     display: none;
   }
 
@@ -442,12 +442,20 @@ field-prefix .mat-icon-button .mat-datepicker-toggle-default-icon, .mat-form-fie
     font-weight: 500;
     background-color: transparent;
     color: white;
-    /* width: 100%; */
-    padding: 0 20px 0 0;
-    margin-top: -20px;
+    width: 170px;
+    padding: 0 0 0 5px;
+    margin-top: -10px;
     float: right;
   }
 
+  /*.header-link::after{*/
+  /*  font-family: "FontAwesome";*/
+  /*  content: "\f0da";*/
+  /*}*/
+  /*.header-back::before{*/
+  /*  font-family: "FontAwesome";*/
+  /*  content: "\f0d9";*/
+  /*}*/
   .btn-form {
     border: 1px solid #bc0001;
     text-transform: uppercase;
