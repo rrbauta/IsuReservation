@@ -9,6 +9,10 @@ public interface IBaseMetaData
 
 public abstract class BaseMetaData : IBaseMetaData
 {
+    /// <summary>
+    ///     Convert to Json
+    /// </summary>
+    /// <returns></returns>
     public string ToJson()
     {
         return JsonConvert.SerializeObject(this, Formatting.None,
