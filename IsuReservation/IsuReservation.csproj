@@ -42,7 +42,6 @@
     <ItemGroup>
         <Folder Include="ClientApp\src\app\custom-components"/>
         <Folder Include="ClientApp\src\assets\images"/>
-        <Folder Include="ClientApp\src\locale"/>
         <Folder Include="Meta"/>
     </ItemGroup>
 
